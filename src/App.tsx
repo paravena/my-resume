@@ -1,6 +1,7 @@
 import {
   Education,
   Header,
+  Passions,
   ProfessionalExperience,
   Summary,
   Technologies,
@@ -17,6 +18,7 @@ const App = () => (
       <section className="max-w-1/4 flex flex-col gap-4">
         <Summary />
         <Technologies />
+        <Passions />
       </section>
     </section>
   </main>
