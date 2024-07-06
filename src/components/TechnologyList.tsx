@@ -5,13 +5,13 @@ type Props = {
 
 const TechnologyList = ({ title, items }: Props) => {
   return (
-    <section>
-      <h3 className="py-2 text-sm">{title}</h3>
+    <section className="space-y-2">
+      <h3 className="text-xl">{title}</h3>
       <ul className="flex flex-wrap gap-1">
         {items.map((text, index) => (
           <li
             key={`item-${title}-${index}`}
-            className="rounded-lg border-2 border-solid border-blue-500 p-1 text-xs"
+            className="text-md rounded-lg border-2 border-solid border-blue-500 p-1"
           >
             {text}
           </li>

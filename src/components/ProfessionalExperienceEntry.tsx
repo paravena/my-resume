@@ -20,19 +20,23 @@ const ProfessionalExperienceEntry = ({
 }: ProfessionalExperienceEntryProps) => {
   return (
     <section className="flex flex-col space-y-2">
-      <h3 className="text-lg text-blue-500">{title}</h3>
-      <h4 className="text-sm">{companyName}</h4>
-      <ul className="flex gap-2 text-xs">
-        <li>
-          <CalendarIcon className="mr-2 inline h-4 w-4 text-blue-500" />
-          From {fromDate} to {toDate ?? 'Present'}
+      <header className="flex justify-between text-xl text-blue-500">
+        <h3>{title}</h3>
+        <h3>{companyName}</h3>
+      </header>
+      <ul className="text-md flex justify-between">
+        <li className="flex items-center gap-2">
+          <CalendarIcon className="inline h-4 w-4 text-blue-500" />
+          <span>
+            From {fromDate} to {toDate ?? 'Present'}
+          </span>
         </li>
-        <li>
-          <MapPinIcon className="mr-2 inline h-4 w-4 text-blue-500" />
-          {location}
+        <li className="flex items-center gap-2">
+          <MapPinIcon className="inline h-4 w-4 text-blue-500" />
+          <span>{location}</span>
         </li>
       </ul>
-      <article className="py-2 text-xs">{children}</article>
+      <article className="text-md py-2 text-justify">{children}</article>
     </section>
   );
 };

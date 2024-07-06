@@ -2,9 +2,9 @@ import TechnologyList from './TechnologyList.tsx';
 
 const Technologies = () => {
   return (
-    <section>
-      <h2 className="text-blue-500">Technologies</h2>
-      <ul className="flex flex-col gap-1">
+    <section className="space-y-2">
+      <h2 className="text-2xl text-blue-500">Technologies</h2>
+      <ul className="flex flex-col gap-4">
         <li>
           <TechnologyList
             title="Programming Languages"
@@ -17,6 +17,8 @@ const Technologies = () => {
               'Elixir',
             ]}
           />
+        </li>
+        <li>
           <TechnologyList
             title="Frameworks and Libraries"
             items={[
@@ -32,14 +34,20 @@ const Technologies = () => {
               'Django',
             ]}
           />
+        </li>
+        <li>
           <TechnologyList
             title="Databases"
             items={['Postgres', 'Oracle', 'Mysql', 'MongoDB']}
           />
+        </li>
+        <li>
           <TechnologyList
             title="Clouds Environments"
             items={['AWS', 'Vercel', 'Railway', 'Heroku']}
           />
+        </li>
+        <li>
           <TechnologyList
             title="Certifications"
             items={[

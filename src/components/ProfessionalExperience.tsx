@@ -10,7 +10,7 @@ const ProfessionalExperience = () => {
         fromDate="January 2018"
         companyName="Toptal.com"
       >
-        <p className="text-xs">
+        <p>
           During my time at <a href="https://total.com">Toptal.com</a>, I have
           been involved in numerous interesting projects for various companies,
           such as{' '}
