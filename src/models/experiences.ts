@@ -3,10 +3,19 @@ import { Experience } from './models';
 const experiences: Experience[] = [
   {
     title: 'Fullstack Developer',
+    companyName: 'Globant',
+    location: 'Santiago, Chile',
+    fromDate: 'December 2024',
+    toDate: 'present',
+    summary: 'Working as Fullstack developer',
+    activities: [],
+  },
+  {
+    title: 'Fullstack Developer',
     companyName: 'Toptal.com',
     location: 'Santiago, Chile',
     fromDate: 'January 2018',
-    toDate: 'present',
+    toDate: 'October 2024',
     summary:
       'Since I began working for <a href="http://www.toptal.com">Toptal.com</a> I have participated in many\n' +
       '             interesting projects for diverse companies, like:',

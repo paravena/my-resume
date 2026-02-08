@@ -7,7 +7,22 @@ const ProfessionalExperience = () => {
       <ProfessionalExperienceEntry
         title="Full Stack Developer"
         location="Santigo, Chile (Remote)"
+        companyName="Globant"
+        fromDate="December 2024"
+      >
+        <p>
+          Working as a Fullstack Developer in{' '}
+          <a href="http://teamsnap.com" target="_blank">
+            Teamsnap
+          </a>{' '}
+          company.
+        </p>
+      </ProfessionalExperienceEntry>
+      <ProfessionalExperienceEntry
+        title="Full Stack Developer"
+        location="Santigo, Chile (Remote)"
         fromDate="January 2018"
+        toDate="October 2024"
         companyName="Toptal.com"
       >
         <p>
@@ -40,9 +55,21 @@ const ProfessionalExperience = () => {
           <li>Typescript</li>
           <li>Node.js</li>
           <li>Python</li>
+          <li>Django</li>
+          <li>Flask</li>
           <li>Java</li>
           <li>Elixir</li>
         </ul>
+        {/*<p className="rounded-xl border-2 border-solid border-blue-500 p-3">*/}
+        {/*  <b>GigSmart:</b> Here initially started working as a frontend*/}
+        {/*  developer working on some internal applications, but very soon I had*/}
+        {/*  to work on backend staff, and I had the opportunity to learn*/}
+        {/*  <b> Elixir</b> programming language, I had implemented some GraphQL*/}
+        {/*  queries and mutations using <b>Absinthe and Phoenix</b> libraries and*/}
+        {/*  also <b>Ecto</b> for database connectivity. Nowadays still learning{' '}*/}
+        {/*  <b>Elixir</b> in my spare time since it is such a great and*/}
+        {/*  interesting programming language*/}
+        {/*</p>*/}
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Software Developer"

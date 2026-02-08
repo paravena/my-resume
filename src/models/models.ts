@@ -4,4 +4,5 @@ export interface Experience {
   fromDate: string;
   toDate?: string;
   location: string;
+  summary: string;
 }
