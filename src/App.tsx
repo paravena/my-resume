@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import {
   Header,
   Passions,
@@ -6,9 +7,25 @@ import {
   Summary,
   Technologies,
 } from './components';
+import DownloadButton from './components/DownloadButton/DownloadButton';
 
-const App = () => (
-  <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 font-witt text-secondary-700">
+const App = () => {
+  const resumeRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={resumeRef}
+      className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12 font-witt text-secondary-700"
+    >
+    {/* Download PDF button - fixed position top-right with responsive positioning */}
+    {/* data-hide-for-print ensures this button is hidden during PDF capture */}
+    <div data-hide-for-print>
+      <DownloadButton
+        targetRef={resumeRef}
+        filename="professional-resume.pdf"
+        className="fixed top-2 right-2 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50"
+      />
+    </div>
     <header className="animate-fade-in">
       <Header />
     </header>
@@ -23,7 +40,8 @@ const App = () => (
         <Passions />
       </aside>
     </main>
-  </div>
-);
+    </div>
+  );
+};
 
 export default App;

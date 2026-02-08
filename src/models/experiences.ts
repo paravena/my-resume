@@ -2,20 +2,27 @@ import { Experience } from './models';
 
 const experiences: Experience[] = [
   {
-    title: 'Fullstack Developer',
-    companyName: 'Globant',
-    location: 'Santiago, Chile',
-    fromDate: 'December 2024',
+    title: 'Full Stack Developer',
+    companyName: 'Indeed',
+    location: 'Remote',
+    fromDate: 'September 2024',
     toDate: 'present',
-    summary: 'Working as Fullstack developer',
-    activities: [],
+    summary:
+      'Working as a Full Stack Developer on the <a href="https://indeed.com/career-advice">Career Guide</a> website. ' +
+      'Building features using micro frontends with Mosaic (Indeed\'s in-house technology), server-side components, batch processes, and GraphQL APIs.',
+    activities: [
+      'Build and maintain micro frontend components using React and TypeScript',
+      'Develop server-side features with Node.js and Java',
+      'Create and optimize GraphQL APIs for data fetching',
+      'Implement batch processes for data processing tasks',
+    ],
   },
   {
     title: 'Fullstack Developer',
     companyName: 'Toptal.com',
     location: 'Santiago, Chile',
     fromDate: 'January 2018',
-    toDate: 'October 2024',
+    toDate: 'August 2024',
     summary:
       'Since I began working for <a href="http://www.toptal.com">Toptal.com</a> I have participated in many\n' +
       '             interesting projects for diverse companies, like:',

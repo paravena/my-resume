@@ -24,7 +24,7 @@ const ProudOf = () => {
           href="http://github.com/paravena/myui2"
           target="_blank"
           rel="noopener noreferrer"
-          className="block pl-7 text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 min-h-[44px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          className="block pl-7 text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
         >
           http://github.com/paravena/myui2
         </a>

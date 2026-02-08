@@ -23,7 +23,7 @@ const Header = () => (
           href="https://linkedin.com/in/paravena74" 
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary-700 hover:text-primary-800 transition-colors duration-250 cursor-pointer hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded py-2 -my-2 min-h-[44px] flex items-center"
+          className="text-primary-700 hover:text-primary-800 transition-colors duration-250 cursor-pointer hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
         >
           https://linkedin.com/in/paravena74
         </a>

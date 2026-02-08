@@ -19,6 +19,17 @@
   }
 }
 
+@keyframes scale-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Animation Utility Classes */
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out;
@@ -63,5 +74,157 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles for PDF Generation */
+@media print {
+  /* Hide elements marked for print exclusion */
+  [data-hide-for-print="true"],
+  [data-hide-for-print] {
+    display: none !important;
+  }
+
+  /* Reset page margins */
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  /* Ensure body takes full width */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+    font-size: 10px !important;
+  }
+
+  /* Container adjustments for print */
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Force two-column layout in print (main content + sidebar) */
+  main {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1rem !important;
+    align-items: flex-start !important;
+  }
+
+  /* Main content column - takes 65% */
+  main > div:first-child {
+    flex: 0 0 64% !important;
+    max-width: 64% !important;
+  }
+
+  /* Sidebar column - takes 34%, auto height */
+  main > aside {
+    flex: 0 0 34% !important;
+    max-width: 34% !important;
+    padding: 0.75rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Remove shadows and hover effects for cleaner print */
+  .shadow-sm, .shadow-md, .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  /* Disable animations */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure backgrounds print */
+  .bg-primary-50, .bg-primary-100, .bg-white,
+  .bg-gradient-to-br {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Allow page breaks - don't force avoid on everything */
+  .card-experience, article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Reduce spacing for print */
+  .space-y-6, .space-y-8 {
+    gap: 0.5rem !important;
+  }
+
+  .space-y-4 {
+    gap: 0.4rem !important;
+  }
+
+  .gap-4, .gap-6, .gap-8 {
+    gap: 0.5rem !important;
+  }
+
+  /* Smaller text for print to fit more content */
+  h2 {
+    font-size: 1rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  p, li {
+    font-size: 0.75rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  ul {
+    margin: 0.2rem 0 !important;
+    padding-left: 1rem !important;
+  }
+
+  /* Ensure links show their URL or are styled appropriately */
+  a {
+    text-decoration: none !important;
+  }
+
+  /* Reduce padding in experience entries */
+  .card-experience {
+    padding: 0.5rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  /* Compact the header for print */
+  header {
+    margin-bottom: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+
+  /* Reduce padding on main content area */
+  .py-8, .py-4, .md\:py-8, .md\:py-12 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+
+  /* Sidebar sections spacing */
+  main > aside > section,
+  main > aside > div {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Pills/tags in sidebar - more compact */
+  .rounded-full {
+    padding: 0.15rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* Summary section */
+  section:first-of-type {
+    margin-bottom: 0.5rem !important;
   }
 }

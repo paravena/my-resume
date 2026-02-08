@@ -7,258 +7,205 @@ const ProfessionalExperience = () => {
       <div className="space-y-4 md:space-y-6">
       <ProfessionalExperienceEntry
         title="Full Stack Developer"
-        location="Santigo, Chile (Remote)"
-        companyName="Globant"
-        fromDate="December 2024"
+        location="Remote"
+        companyName="Indeed"
+        fromDate="September 2024"
       >
         <p>
-          Working as a Fullstack Developer in{' '}
+          Working as a Full Stack Developer on the{' '}
           <a 
-            href="http://teamsnap.com" 
+            href="https://indeed.com/career-advice" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
           >
-            Teamsnap
+            Career Guide
           </a>{' '}
-          company.
+          website. I build features using micro frontends with Mosaic (Indeed's in-house technology), 
+          server-side components, batch processes, and GraphQL APIs.
         </p>
+        <ul className="list-disc px-4 py-2">
+          <li>Build and maintain micro frontend components using React and TypeScript</li>
+          <li>Develop server-side features with Node.js and Java</li>
+          <li>Create and optimize GraphQL APIs for data fetching</li>
+          <li>Implement batch processes for data processing tasks</li>
+        </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Full Stack Developer"
-        location="Santigo, Chile (Remote)"
+        location="Santiago, Chile (Remote)"
         fromDate="January 2018"
-        toDate="October 2024"
+        toDate="August 2024"
         companyName="Toptal.com"
       >
         <p>
-          During my time at <a 
-            href="https://total.com"
+          As a freelance developer at{' '}
+          <a 
+            href="https://toptal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >Toptal.com</a>, I have
-          been involved in numerous interesting projects for various companies,
-          such as{' '}
+          >Toptal.com</a>, I worked on projects for companies like{' '}
           <a 
             href="http://gigsmart.com" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >
-            GigSmart
-          </a>
-          , &nbsp;
+          >GigSmart</a>,{' '}
           <a 
             href="https://steadyapp.com" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >
-            SteadyApp
-          </a>
-          , &nbsp;
+          >SteadyApp</a>,{' '}
           <a 
             href="http://alteryx.com" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >
-            Alteryx
-          </a>
-          , and &nbsp;
+          >Alteryx</a>, and{' '}
           <a 
             href="https://myhalo.ai" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >
-            Halo By Hines
-          </a>
-          . Here are some of the technologies and tools I have had the
-          opportunity to work with:
+          >Halo By Hines</a>.
         </p>
-        <ul className="list-disc px-4 py-2">
-          <li>React</li>
-          <li>React Native</li>
-          <li>Next</li>
-          <li>Javascript</li>
-          <li>Typescript</li>
-          <li>Node.js</li>
-          <li>Python</li>
-          <li>Django</li>
-          <li>Flask</li>
-          <li>Java</li>
-          <li>Elixir</li>
+        <p className="mt-3"><strong>SteadyApp</strong> - React Native mobile app development:</p>
+        <ul className="list-disc px-4 py-1">
+          <li>Built authentication system using Auth0</li>
+          <li>Implemented A/B testing with Optimizely</li>
+          <li>Created integrations with Plaid and Argyle for financial data</li>
+          <li>Developed multiple screens and navigation flows</li>
         </ul>
-        {/*<p className="rounded-xl border-2 border-solid border-blue-500 p-3">*/}
-        {/*  <b>GigSmart:</b> Here initially started working as a frontend*/}
-        {/*  developer working on some internal applications, but very soon I had*/}
-        {/*  to work on backend staff, and I had the opportunity to learn*/}
-        {/*  <b> Elixir</b> programming language, I had implemented some GraphQL*/}
-        {/*  queries and mutations using <b>Absinthe and Phoenix</b> libraries and*/}
-        {/*  also <b>Ecto</b> for database connectivity. Nowadays still learning{' '}*/}
-        {/*  <b>Elixir</b> in my spare time since it is such a great and*/}
-        {/*  interesting programming language*/}
-        {/*</p>*/}
+        <p className="mt-3"><strong>GigSmart</strong> - Backend development with Elixir:</p>
+        <ul className="list-disc px-4 py-1">
+          <li>Built GraphQL mutations and queries using Absinthe</li>
+          <li>Worked with Ecto for database operations</li>
+          <li>APIs consumed by React web apps using Relay</li>
+        </ul>
+        <p className="mt-3"><strong>Alteryx</strong> - Internal software license management system:</p>
+        <ul className="list-disc px-4 py-1">
+          <li>Built backend with Java and Spring Framework</li>
+          <li>Integrated with legacy SOAP-based APIs</li>
+          <li>Implemented caching layer using Redis for better performance</li>
+          <li>Created frontend with React and TypeScript</li>
+        </ul>
+        <p className="mt-3"><strong>Halo by Hines</strong> - AI-powered real estate marketing platform:</p>
+        <ul className="list-disc px-4 py-1">
+          <li>Built MVP web app for creating property advertisements</li>
+          <li>Integrated AI tools to generate marketing content automatically</li>
+          <li>Developed media upload system for property images</li>
+          <li>Created AI-generated visualizations of remodeled interiors and exteriors</li>
+        </ul>
+        <p className="mt-2">Technologies I used:</p>
+        <ul className="list-disc px-4 py-2">
+          <li>React, React Native, Next.js, Relay</li>
+          <li>JavaScript, TypeScript, Elixir</li>
+          <li>Node.js, Java, Spring Framework, Python (Django, Flask)</li>
+          <li>Redis, SOAP APIs, AI/ML integrations</li>
+          <li>Auth0, Optimizely, Plaid, Argyle</li>
+        </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Software Developer"
-        location="Santigo, Chile (Remote)"
+        location="Santiago, Chile (Remote)"
         fromDate="December 2016"
         toDate="April 2019"
         companyName="RecoveryPlanner"
       >
         <p>
-          I was in charge of creating and designing the latest iteration of RPX,
-          an online risk management application. The web-based version of the
-          app was developed with Angular 2+ and Material UI, while I also worked
-          on designing a mobile version using Ionix and the Meteor framework.
-          Some of the technologies and tools I have had the opportunity to work
-          with:
+          I designed and built RPX, a web-based risk management application. 
+          I created the frontend using Angular and Material UI. I also built 
+          a mobile app prototype using Ionic and Meteor.
         </p>
+        <p className="mt-2">Technologies I used:</p>
         <ul className="list-disc px-4 py-2">
-          <li>Angular</li>
-          <li>Ionix</li>
-          <li>Meteor</li>
-          <li>Javascript</li>
-          <li>Typescript</li>
+          <li>Angular, Ionic, Meteor</li>
+          <li>JavaScript, TypeScript</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Technical Lead"
-        location="Santigo, Chile"
+        location="Santiago, Chile"
         fromDate="January 2013"
         toDate="September 2016"
         companyName="Nisum"
       >
-        <ul className="space-y-2">
+        <p>Key projects I led:</p>
+        <ul className="space-y-2 mt-2">
           <li>
-            I have been working in lot of things during my time here at Nisum
-            Technologies, the most important and relevant projects I have been
-            involved with, are the following:
+            <strong>Macy's DevOps:</strong> Built a deployment workflow system using Activiti BPMN 
+            and Spring Framework to manage software releases across multiple environments.
           </li>
           <li>
-            Macys Devops I was working in the definition and implementation of a
-            workflow which define how software artifacts are deployed in
-            multiple environment. The most relevant tool we used for this
-            project was Activiti BPMN and Spring Framework as well.
+            <strong>Size & Pack:</strong> Created middleware to process and transform purchase orders 
+            from different systems into a common format. Used Cucumber for testing and practiced TDD.
           </li>
           <li>
-            Size & Pack project is a middleware software component, whose main
-            purpose is processing Purchase Orders coming from two different
-            systems, enriching the information and restructuring to a common
-            format.Working on this project give me the chance to be exposed to
-            new technologies like Cucumber component testing tool and the new
-            features provided by last version of the Spring Framework , as well
-            to reinforce my knowledge about TDD practices.
-          </li>
-          <li>
-            EMV POS, I was working in maintenance and upgrading of Point of Sale
-            solutions (Oracle POS) used by GAP retail company. One of the
-            projects I was involved was called EMV (European Mastercard Visa),
-            whose purpose was to upgrade the current POS solution used by Gap,
-            to allow the usage of EMV Credit / Debit cards which use the Chip &
-            Pin as the transaction authorization mechanism.
+            <strong>GAP EMV POS:</strong> Upgraded Point of Sale systems to support chip and PIN 
+            credit/debit cards (EMV standard).
           </li>
         </ul>
-        <p>
-          Some of the technologies and tools I have had the opportunity to work
-          with:
-        </p>
+        <p className="mt-2">Technologies I used:</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java</li>
-          <li>Spring Framework</li>
-          <li>JUnit</li>
-          <li>Cucumber</li>
-          <li>Maven</li>
+          <li>Java, Spring Framework</li>
+          <li>JUnit, Cucumber, Maven</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Senior Developer"
-        location="Santigo, Chile"
+        location="Santiago, Chile"
         fromDate="July 2011"
-        toDate="December 2013"
+        toDate="December 2012"
         companyName="Experian Interactive Media"
       >
         <p>
-          Development, maintenance, upgrading, and supporting of Lending
-          andMarketing web based solutions. Some of the main systems I was
-          involved with were:
+          Built and maintained web applications for lending and marketing. Key projects:
         </p>
-        <ul className="space-y-2">
+        <ul className="space-y-2 mt-2">
           <li>
-            Lending Vertical Is a web based consultancy system that allows users
-            to query for the best credit alternative available in the
-            market.(http://www.lowermybills.com). Once the user provides the
-            information required by the system, this was expressed as a kind of
-            survey, then the system responds with a list of possible lender
-            institutions. Behind the scene, there was a fully implemented
-            workflow process that interact with external or third party systems
-            that provides information like the credit score or correct identity
-            of the person authenticated.
+            <strong>LowerMyBills.com:</strong> A loan comparison website that helps users find 
+            the best credit options. The system collects user information, checks credit scores 
+            through external APIs, and shows matching lenders.
           </li>
           <li>
-            Campaign Administration System (CAS) Is an internal system that
-            allows the creation and management of web based campaigns. This
-            system provides a workflow that involves the participation of
-            campaign managers, creative managers, media buyers etc.
+            <strong>Campaign Administration System:</strong> An internal tool for creating and 
+            managing marketing campaigns with workflow support for different team roles.
           </li>
         </ul>
-        <p>
-          Some of the technologies and tools I have had the opportunity to work
-          with:
-        </p>
+        <p className="mt-2">Technologies I used:</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java</li>
-          <li>Spring Framework</li>
-          <li>JUnit</li>
-          <li>Maven</li>
-          <li>AngularJS</li>
+          <li>Java, Spring Framework</li>
+          <li>AngularJS, JUnit, Maven</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
         title="Senior Developer"
-        location="Santigo, Chile"
+        location="Santiago, Chile"
         fromDate="November 2004"
         toDate="June 2011"
-        companyName="FeDex"
+        companyName="FedEx"
       >
         <p>
-          Design and implementation of new software solutions targeted to LAC
-          region. Some of the most important projects I was involved with were:
+          Built software solutions for the Latin America and Caribbean region. Key projects:
         </p>
         <ul className="mt-2 space-y-2">
           <li>
-            FGC Low Value Module A mobile application specifically dedicated, to
-            shipments classified as low value, allowing data adjustment and
-            reports generation which are transferred to Customs.
+            <strong>Low Value Module:</strong> A mobile app for processing low-value shipments, 
+            allowing data updates and generating customs reports.
           </li>
           <li>
-            FGC FedEx Global Clearance System, is a system dedicated to the
-            depuration, adjustment, and enrichment of the manifest data which is
-            the list of all shipments packages that are arriving to a specific
-            location for a given date and fligth. Initially each country had its
-            own home made solution for this proplem, mostly because of the
-            different legislation rules that each country imposed. The purpose
-            of this software application was to define and implement a unified
-            solution for processing manifest data.Initially a basic solution was
-            deployed in Trinidad and Tobago country after that the solution was
-            evolved providing new features that make it possible to be deployed
-            in other countries like Costa Rica, Mexico, Brazil etc.
+            <strong>FedEx Global Clearance (FGC):</strong> A system that processes shipment 
+            manifest data (list of packages arriving on each flight). I helped create a unified 
+            solution that replaced country-specific systems. Started in Trinidad and Tobago, 
+            then expanded to Costa Rica, Mexico, Brazil, and other countries.
           </li>
         </ul>
-        <p>
-          Some of the technologies and tools I have had the opportunity to work
-          with:
-        </p>
+        <p className="mt-2">Technologies I used:</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java</li>
-          <li>Spring Framework</li>
-          <li>JUnit</li>
-          <li>Maven</li>
-          <li>JQuery</li>
-          <li>Javascript</li>
+          <li>Java, Spring Framework</li>
+          <li>JUnit, Maven, jQuery</li>
         </ul>
       </ProfessionalExperienceEntry>
       </div>

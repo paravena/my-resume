@@ -30,13 +30,13 @@ const ProfessionalExperienceEntry = ({
       </header>
       <ul className="flex flex-col sm:flex-row sm:justify-between gap-2 mb-4 text-body-sm text-secondary-600">
         <li className="flex items-center gap-2">
-          <CalendarIcon className="inline h-5 w-5 text-primary-500 flex-shrink-0" aria-hidden="true" />
+          <CalendarIcon className="h-5 w-5 text-primary-500 flex-shrink-0" aria-hidden="true" />
           <span>
             From {fromDate} to {toDate ?? 'Present'}
           </span>
         </li>
         <li className="flex items-center gap-2">
-          <MapPinIcon className="inline h-5 w-5 text-primary-500 flex-shrink-0" aria-hidden="true" />
+          <MapPinIcon className="h-5 w-5 text-primary-500 flex-shrink-0" aria-hidden="true" />
           <span>{location}</span>
         </li>
       </ul>

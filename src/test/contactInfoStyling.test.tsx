@@ -77,11 +77,11 @@ describe('Contact Info Styling', () => {
       if (linkedInLink) {
         const classList = linkedInLink.getAttribute('class') || '';
         
-        // Should have base color
-        expect(classList).toContain('text-primary-600');
+        // Should have base color - using primary-700 for better contrast
+        expect(classList).toContain('text-primary-700');
         
         // Should have hover color
-        expect(classList).toContain('hover:text-primary-700');
+        expect(classList).toContain('hover:text-primary-800');
         
         // Should have transition
         expect(classList).toContain('transition-colors');
