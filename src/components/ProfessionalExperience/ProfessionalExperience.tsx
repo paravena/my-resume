@@ -2,8 +2,9 @@ import ProfessionalExperienceEntry from './ProfessionalExperienceEntry.tsx';
 
 const ProfessionalExperience = () => {
   return (
-    <div className="flex flex-1 flex-col space-y-4">
-      <h2 className="text-2xl">Professional Experience</h2>
+    <section className="flex flex-1 flex-col space-y-6 md:space-y-8">
+      <h2 className="text-h2 md:text-3xl font-semibold text-secondary-800 mb-2">Professional Experience</h2>
+      <div className="space-y-4 md:space-y-6">
       <ProfessionalExperienceEntry
         title="Full Stack Developer"
         location="Santigo, Chile (Remote)"
@@ -12,7 +13,12 @@ const ProfessionalExperience = () => {
       >
         <p>
           Working as a Fullstack Developer in{' '}
-          <a href="http://teamsnap.com" target="_blank">
+          <a 
+            href="http://teamsnap.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >
             Teamsnap
           </a>{' '}
           company.
@@ -26,22 +32,47 @@ const ProfessionalExperience = () => {
         companyName="Toptal.com"
       >
         <p>
-          During my time at <a href="https://total.com">Toptal.com</a>, I have
+          During my time at <a 
+            href="https://total.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >Toptal.com</a>, I have
           been involved in numerous interesting projects for various companies,
           such as{' '}
-          <a href="http://gigsmart.com" target="_blank">
+          <a 
+            href="http://gigsmart.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >
             GigSmart
           </a>
           , &nbsp;
-          <a href="https://steadyapp.com" target="_blank">
+          <a 
+            href="https://steadyapp.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >
             SteadyApp
           </a>
           , &nbsp;
-          <a href="http://alteryx.com" target="_blank">
+          <a 
+            href="http://alteryx.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >
             Alteryx
           </a>
           , and &nbsp;
-          <a href="https://myhalo.ai" target="_blank">
+          <a 
+            href="https://myhalo.ai" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
+          >
             Halo By Hines
           </a>
           . Here are some of the technologies and tools I have had the
@@ -230,7 +261,8 @@ const ProfessionalExperience = () => {
           <li>Javascript</li>
         </ul>
       </ProfessionalExperienceEntry>
-    </div>
+      </div>
+    </section>
   );
 };
 

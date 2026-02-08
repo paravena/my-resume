@@ -7,3 +7,61 @@
     src: url("./assets/fonts/Wittgenstein/Wittgenstein-VariableFont_wght.ttf") format('truetype');
 }
 
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation Utility Classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+/* Card Utility Classes */
+@layer components {
+  .card-base {
+    @apply rounded-lg bg-white shadow-sm border border-secondary-200;
+  }
+
+  .card-elevated {
+    @apply rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .card-sidebar {
+    @apply rounded-lg bg-gradient-to-br from-primary-50 to-primary-100 p-6 shadow-sm;
+  }
+
+  .card-experience {
+    @apply rounded-lg bg-white p-4 md:p-6 shadow-sm border border-secondary-200 
+           hover:shadow-md hover:border-primary-300 hover:-translate-y-1 
+           transition-all duration-300;
+  }
+
+  /* Focus Ring Utility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
