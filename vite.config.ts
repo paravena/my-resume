@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/my-resume/',
   plugins: [react()],
+  // @ts-expect-error -- vitest injects the test property at runtime
   test: {
     globals: true,
     environment: 'jsdom',

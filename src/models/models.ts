@@ -5,4 +5,5 @@ export interface Experience {
   toDate?: string;
   location: string;
   summary: string;
+  activities: string[];
 }

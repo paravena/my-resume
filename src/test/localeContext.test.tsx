@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { LocaleContext, LocaleProvider } from '../i18n/LocaleContext';
 import { LOCALE_STORAGE_KEY } from '../i18n/types';
 

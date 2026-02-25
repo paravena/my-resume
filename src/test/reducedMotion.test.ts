@@ -24,7 +24,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
       pretendToBeVisual: true,
     });
     document = dom.window.document;
-    window = dom.window as Window & typeof globalThis;
+    window = dom.window as unknown as Window & typeof globalThis;
   });
 
   afterEach(() => {

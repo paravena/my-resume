@@ -237,7 +237,6 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
 
     it('should ensure primary text colors on white background meet WCAG AA for normal text', () => {
       const whiteBg = colorPalette.white;
-      const normalTextSize = 16;
 
       // Test darker shades of primary color (700-900) which should be used for text
       // Note: primary-600 does NOT meet 4.5:1 requirement (only 4.1:1)
@@ -265,7 +264,6 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
 
     it('should ensure secondary text colors on white background meet WCAG AA for normal text', () => {
       const whiteBg = colorPalette.white;
-      const normalTextSize = 16;
 
       // Test darker shades of secondary color (600-900) which should be used for text
       const textColors = [
