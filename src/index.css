@@ -88,7 +88,7 @@
   /* Reset page margins */
   @page {
     size: A4 portrait;
-    margin: 8mm;
+    margin: 12mm 10mm;
   }
 
   /* Ensure body takes full width */
@@ -99,10 +99,10 @@
     font-size: 10px !important;
   }
 
-  /* Container adjustments for print - remove toolbar top padding */
+  /* Container adjustments for print - add breathing room */
   .container {
     max-width: 100% !important;
-    padding: 0 !important;
+    padding: 4mm 6mm !important;
     margin: 0 !important;
   }
 
@@ -217,7 +217,11 @@
   }
 
   /* Remove all top/bottom padding overrides from toolbar spacing */
-  .pt-16, .pt-12, .md\:pt-20 {
+  .pt-16, .pt-12 {
+    padding-top: 0 !important;
+  }
+
+  .md\:pt-20 {
     padding-top: 0 !important;
   }
 
@@ -228,6 +232,11 @@
   .py-8, .py-4, .md\:py-8, .md\:py-12 {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+  }
+
+  /* Override container padding after zeroing toolbar spacing */
+  .container.mx-auto {
+    padding: 4mm 6mm !important;
   }
 
   /* Sidebar sections spacing */
