@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { handlePDFError } from '../../services/PDFErrors';
 import { checkBrowserSupport, getUnsupportedFeaturesMessage, BrowserSupportResult } from '../../services/BrowserFeatureDetection';
+import { useLocale } from '../../i18n';
 
 /**
  * Props interface for the DownloadButton component.
@@ -51,6 +52,8 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
   onSuccess,
   onError,
 }) => {
+  const { t } = useLocale();
+
   /**
    * State for tracking PDF generation in progress.
    * When true, the button should be disabled and show a loading indicator.
@@ -219,7 +222,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       // Validate that the target element exists
       const element = targetRef.current;
       if (!element) {
-        throw new Error('Target element not found');
+        throw new Error(t('downloadButton.error.targetNotFound'));
       }
 
       // Store original document title to restore later
@@ -385,10 +388,10 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
         </div>
         <div className="flex flex-col">
           <p className="text-sm font-medium text-blue-800">
-            Still generating your PDF...
+            {t('downloadButton.longOperation.title')}
           </p>
           <p className="text-xs text-blue-600 mt-0.5">
-            This is taking longer than expected ({elapsedSeconds}s elapsed)
+            {t('downloadButton.longOperation.elapsed').replace('{seconds}', String(elapsedSeconds))}
           </p>
         </div>
       </div>
@@ -405,13 +408,13 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       return getUnsupportedFeaturesMessage(browserSupport) || 'Browser features not supported';
     }
     if (isGenerating && isLongOperation) {
-      return `Generating PDF, this is taking longer than expected. ${elapsedSeconds} seconds elapsed...`;
+      return `${t('downloadButton.generating')} ${t('downloadButton.longOperation.elapsed').replace('{seconds}', String(elapsedSeconds))}`;
     }
     if (isGenerating) {
-      return 'Generating PDF, please wait...';
+      return t('downloadButton.generating');
     }
     if (showSuccess) {
-      return 'PDF downloaded successfully!';
+      return t('downloadButton.downloaded');
     }
     if (error) {
       return `Error: ${error}`;
@@ -470,7 +473,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md
           ${className || ''}
         `.trim().replace(/\s+/g, ' ')}
-        aria-label={isGenerating ? 'Generating PDF, please wait' : showSuccess ? 'PDF downloaded successfully' : browserWarningMessage ? 'Download PDF - feature not supported' : 'Download resume as PDF'}
+        aria-label={isGenerating ? t('downloadButton.generating') : showSuccess ? t('downloadButton.downloaded') : browserWarningMessage ? 'Download PDF - feature not supported' : t('downloadButton.download')}
         aria-busy={isGenerating}
         aria-disabled={isButtonDisabled}
         onClick={handleDownload}
@@ -479,17 +482,17 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
         {isGenerating ? (
           <>
             <LoadingSpinner />
-            <span>Generating PDF...</span>
+            <span>{t('downloadButton.generating')}</span>
           </>
         ) : showSuccess ? (
           <>
             <SuccessIcon />
-            <span>Downloaded!</span>
+            <span>{t('downloadButton.downloaded')}</span>
           </>
         ) : (
           <>
             <DownloadIcon />
-            <span>Download PDF</span>
+            <span>{t('downloadButton.download')}</span>
           </>
         )}
       </button>
@@ -593,7 +596,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
               />
             </svg>
-            <span>Try Again</span>
+            <span>{t('downloadButton.retry')}</span>
           </button>
         </div>
       )}

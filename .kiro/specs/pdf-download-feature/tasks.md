@@ -341,7 +341,7 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - **Validates: Requirements 4.1**
 
 - [ ] 13. Final integration and polish
-  - [~] 13.1 Test complete user flow
+  - [ ] 13.1 Test complete user flow
     - Load application
     - Click download button
     - Verify PDF downloads
@@ -349,14 +349,14 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - Test on multiple browsers
     - _Requirements: 1.1, 1.2, 1.3, 5.1_
   
-  - [~] 13.2 Add loading animation and visual polish
+  - [ ] 13.2 Add loading animation and visual polish
     - Create smooth loading spinner
     - Add success checkmark animation
     - Polish error message styling
     - Ensure consistent design with app
     - _Requirements: 3.2, 3.4, 3.5_
   
-  - [~] 13.3 Optimize PDF file size
+  - [ ] 13.3 Optimize PDF file size
     - Test generated PDF file sizes
     - Adjust compression settings if needed
     - Balance quality vs file size
@@ -369,7 +369,7 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - Test with external images
     - _Requirements: 1.5, 7.5_
   
-  - [~] 13.5 Update component exports
+  - [ ] 13.5 Update component exports
     - Export DownloadButton from components/index.ts
     - Ensure proper TypeScript types are exported
     - _Requirements: 1.1_

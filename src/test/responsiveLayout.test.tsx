@@ -4,6 +4,22 @@ import { JSDOM } from 'jsdom';
 import { render } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
+import { LocaleContext } from '../i18n/LocaleContext';
+import type { LocaleContextValue } from '../i18n/LocaleContext';
+
+const mockLocaleContext: LocaleContextValue = {
+  locale: 'en',
+  setLocale: () => {},
+  t: (key: string) => key,
+  isLoading: false,
+};
+
+const renderWithLocale = (ui: React.ReactElement) =>
+  render(
+    <LocaleContext.Provider value={mockLocaleContext}>
+      {ui}
+    </LocaleContext.Provider>
+  );
 
 /**
  * **Feature: portfolio-design-improvements**
@@ -142,7 +158,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
             setViewportWidth(viewportWidth);
 
             // Render the App component
-            const { container } = render(<App />);
+            const { container } = renderWithLocale(<App />);
 
             // Find the main layout section (the one with flex-col md:flex-row)
             const layoutSection = container.querySelector('main > section');
@@ -163,7 +179,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
     it('should have single-column layout classes on the main section', () => {
       // This is a unit test to verify the classes are present
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const layoutSection = container.querySelector('main > section');
       
       expect(layoutSection).toBeTruthy();
@@ -192,7 +208,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
             setViewportWidth(viewportWidth);
 
             // Render the App component
-            const { container } = render(<App />);
+            const { container } = renderWithLocale(<App />);
 
             // Find the main layout section
             const layoutSection = container.querySelector('main > section');
@@ -224,7 +240,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
             setViewportWidth(viewportWidth);
 
             // Render the App component
-            const { container } = render(<App />);
+            const { container } = renderWithLocale(<App />);
 
             // Find the main layout section
             const layoutSection = container.querySelector('main > section');
@@ -254,7 +270,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
     it('should have proper width classes on columns', () => {
       // This is a unit test to verify the classes are present
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const layoutSection = container.querySelector('main > section');
       
       expect(layoutSection).toBeTruthy();
@@ -289,7 +305,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
           ([mobileWidth, desktopWidth]) => {
             // Test mobile layout
             setViewportWidth(mobileWidth);
-            const { container: mobileContainer } = render(<App />);
+            const { container: mobileContainer } = renderWithLocale(<App />);
             const mobileSection = mobileContainer.querySelector('main > section');
             
             expect(mobileSection).toBeTruthy();
@@ -300,7 +316,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
             // Test desktop layout
             setViewportWidth(desktopWidth);
-            const { container: desktopContainer } = render(<App />);
+            const { container: desktopContainer } = renderWithLocale(<App />);
             const desktopSection = desktopContainer.querySelector('main > section');
             
             expect(desktopSection).toBeTruthy();

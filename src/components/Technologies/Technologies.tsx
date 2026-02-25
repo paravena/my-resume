@@ -1,13 +1,16 @@
 import TechnologyList from './TechnologyList.tsx';
+import { useLocale } from '../../i18n';
 
 const Technologies = () => {
+  const { t } = useLocale();
+
   return (
     <section className="space-y-3 md:space-y-4 pt-4 md:pt-6 border-t-2 border-primary-200/60">
-      <h2 className="text-xl sm:text-h2 font-semibold text-secondary-800">Technologies</h2>
+      <h2 className="text-xl sm:text-h2 font-semibold text-secondary-800">{t('technologies.title')}</h2>
       <ul className="flex flex-col gap-4 md:gap-6">
         <li>
           <TechnologyList
-            title="Programming Languages"
+            title={t('technologies.programmingLanguages.title')}
             items={[
               'Javascript',
               'Typescript',
@@ -20,7 +23,7 @@ const Technologies = () => {
         </li>
         <li>
           <TechnologyList
-            title="Frameworks and Libraries"
+            title={t('technologies.frameworks.title')}
             items={[
               'React',
               'React Native',
@@ -30,6 +33,7 @@ const Technologies = () => {
               'Express',
               'NestJs',
               'Spring Framework',
+              'Spring Boot',
               'Flask',
               'Django',
             ]}
@@ -37,19 +41,19 @@ const Technologies = () => {
         </li>
         <li>
           <TechnologyList
-            title="Databases"
+            title={t('technologies.databases.title')}
             items={['Postgres', 'Oracle', 'Mysql', 'MongoDB']}
           />
         </li>
         <li>
           <TechnologyList
-            title="Clouds Environments"
+            title={t('technologies.clouds.title')}
             items={['AWS', 'Vercel', 'Railway', 'Heroku']}
           />
         </li>
         <li>
           <TechnologyList
-            title="Certifications"
+            title={t('technologies.certifications.title')}
             items={[
               'Sun Certified Java Developer',
               'Sun Certified Java Programmer',
@@ -62,5 +66,6 @@ const Technologies = () => {
     </section>
   );
 };
+
 
 export default Technologies;

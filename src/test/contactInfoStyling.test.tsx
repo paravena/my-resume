@@ -1,6 +1,31 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import Header from '../components/Header/Header';
+import { LocaleContext } from '../i18n/LocaleContext';
+import type { LocaleContextValue } from '../i18n/LocaleContext';
+
+const mockLocaleContext: LocaleContextValue = {
+  locale: 'en',
+  setLocale: () => {},
+  t: (key: string) => {
+    const translations: Record<string, string> = {
+      'header.name': 'Pablo Aravena',
+      'header.phone': '+56 9 62810987',
+      'header.email': 'paravena74@gmail.com',
+      'header.linkedin': 'https://linkedin.com/in/paravena74',
+      'header.location': 'Santiago, Chile',
+    };
+    return translations[key] ?? key;
+  },
+  isLoading: false,
+};
+
+const renderWithLocale = (ui: React.ReactElement) =>
+  render(
+    <LocaleContext.Provider value={mockLocaleContext}>
+      {ui}
+    </LocaleContext.Provider>
+  );
 
 /**
  * Unit tests for contact info styling improvements (Task 4.2)
@@ -18,7 +43,7 @@ import Header from '../components/Header/Header';
 describe('Contact Info Styling', () => {
   describe('Icon Styling', () => {
     it('should have icons with correct size classes (h-5 w-5)', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const icons = container.querySelectorAll('svg');
       
       expect(icons.length).toBeGreaterThan(0);
@@ -31,7 +56,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have icons with primary color scheme', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const icons = container.querySelectorAll('svg');
       
       icons.forEach((icon) => {
@@ -41,7 +66,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have icons with flex-shrink-0 to prevent shrinking', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const icons = container.querySelectorAll('svg');
       
       icons.forEach((icon) => {
@@ -53,7 +78,7 @@ describe('Contact Info Styling', () => {
 
   describe('Icon-Text Alignment', () => {
     it('should use flex utilities for icon-text alignment', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const listItems = container.querySelectorAll('li');
       
       expect(listItems.length).toBeGreaterThan(0);
@@ -69,7 +94,7 @@ describe('Contact Info Styling', () => {
 
   describe('Link Hover States', () => {
     it('should have LinkedIn link with hover state classes', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const linkedInLink = container.querySelector('a[href*="linkedin"]');
       
       expect(linkedInLink).toBeTruthy();
@@ -96,7 +121,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have LinkedIn link with proper accessibility attributes', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const linkedInLink = container.querySelector('a[href*="linkedin"]');
       
       expect(linkedInLink).toBeTruthy();
@@ -111,7 +136,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have LinkedIn link with focus-visible styles', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const linkedInLink = container.querySelector('a[href*="linkedin"]');
       
       expect(linkedInLink).toBeTruthy();
@@ -131,7 +156,7 @@ describe('Contact Info Styling', () => {
 
   describe('Responsive Layout', () => {
     it('should have flex-wrap for responsive wrapping', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const contactList = container.querySelector('ul');
       
       expect(contactList).toBeTruthy();
@@ -144,7 +169,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have responsive text sizing', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const contactList = container.querySelector('ul');
       
       expect(contactList).toBeTruthy();
@@ -159,7 +184,7 @@ describe('Contact Info Styling', () => {
 
   describe('Spacing', () => {
     it('should have proper spacing between contact items', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const contactList = container.querySelector('ul');
       
       expect(contactList).toBeTruthy();
@@ -178,7 +203,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should use larger horizontal gap than vertical gap', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const contactList = container.querySelector('ul');
       
       expect(contactList).toBeTruthy();
@@ -206,7 +231,7 @@ describe('Contact Info Styling', () => {
 
   describe('Contact Items', () => {
     it('should render all contact items (phone, email, LinkedIn, location)', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const listItems = container.querySelectorAll('li');
       
       // Should have 4 contact items
@@ -214,7 +239,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have phone contact with PhoneIcon', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const phoneItem = Array.from(container.querySelectorAll('li')).find(
         (li) => li.textContent?.includes('+56')
       );
@@ -224,7 +249,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have email contact with EnvelopeIcon', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const emailItem = Array.from(container.querySelectorAll('li')).find(
         (li) => li.textContent?.includes('@gmail.com')
       );
@@ -234,7 +259,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have LinkedIn contact with LinkIcon', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const linkedInItem = Array.from(container.querySelectorAll('li')).find(
         (li) => li.textContent?.includes('linkedin')
       );
@@ -245,7 +270,7 @@ describe('Contact Info Styling', () => {
     });
 
     it('should have location contact with MapPinIcon', () => {
-      const { container } = render(<Header />);
+      const { container } = renderWithLocale(<Header />);
       const locationItem = Array.from(container.querySelectorAll('li')).find(
         (li) => li.textContent?.includes('Santiago')
       );

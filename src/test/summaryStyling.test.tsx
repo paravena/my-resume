@@ -2,6 +2,22 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { JSDOM } from 'jsdom';
 import { render } from '@testing-library/react';
 import App from '../App';
+import { LocaleContext } from '../i18n/LocaleContext';
+import type { LocaleContextValue } from '../i18n/LocaleContext';
+
+const mockLocaleContext: LocaleContextValue = {
+  locale: 'en',
+  setLocale: () => {},
+  t: (key: string) => key,
+  isLoading: false,
+};
+
+const renderWithLocale = (ui: React.ReactElement) =>
+  render(
+    <LocaleContext.Provider value={mockLocaleContext}>
+      {ui}
+    </LocaleContext.Provider>
+  );
 
 /**
  * **Feature: portfolio-design-improvements**
@@ -42,11 +58,11 @@ describe('Summary Component Styling - Unit Tests', () => {
 
   describe('Section Heading Typography', () => {
     it('should use h2 typography scale for the section heading', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
-      // Find the Summary section
+      // Find the Summary section (mock t() returns the key itself, so look for 'summary.title')
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       
@@ -64,10 +80,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have proper color for the heading', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const heading = summarySection.querySelector('h2');
@@ -84,10 +100,10 @@ describe('Summary Component Styling - Unit Tests', () => {
 
   describe('Body Text Styling', () => {
     it('should use body typography scale for paragraph text', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       
@@ -109,10 +125,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have responsive text sizing (body on mobile, body-lg on desktop)', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const paragraph = summarySection.querySelector('p');
@@ -128,10 +144,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have proper line height for readability', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const paragraph = summarySection.querySelector('p');
@@ -146,10 +162,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have proper text color', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const paragraph = summarySection.querySelector('p');
@@ -166,10 +182,10 @@ describe('Summary Component Styling - Unit Tests', () => {
 
   describe('Spacing and Layout', () => {
     it('should have proper spacing between heading and content', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       
@@ -182,10 +198,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have responsive spacing (smaller on mobile, larger on desktop)', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const classList = summarySection.className;
@@ -197,10 +213,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have appropriate padding for the section container', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       
@@ -213,10 +229,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should have responsive padding (smaller on mobile, larger on desktop)', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const classList = summarySection.className;
@@ -230,10 +246,10 @@ describe('Summary Component Styling - Unit Tests', () => {
 
   describe('Section Boundary Definition', () => {
     it('should have clear visual separation as a section', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       
@@ -252,10 +268,10 @@ describe('Summary Component Styling - Unit Tests', () => {
     });
 
     it('should use semantic section element', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       expect(summarySection).toBeTruthy();
       expect(summarySection?.tagName.toLowerCase()).toBe('section');
@@ -264,10 +280,10 @@ describe('Summary Component Styling - Unit Tests', () => {
 
   describe('Visual Hierarchy', () => {
     it('should have heading with larger font size than body text', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       
       const summarySection = Array.from(container.querySelectorAll('section'))
-        .find(section => section.textContent?.includes('Summary'));
+        .find(section => section.textContent?.includes('summary.title'));
       
       if (summarySection) {
         const heading = summarySection.querySelector('h2');

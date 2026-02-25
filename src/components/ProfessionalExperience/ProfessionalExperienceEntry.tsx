@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { MapPinIcon, CalendarIcon } from '@heroicons/react/20/solid';
+import { useLocale } from '../../i18n';
 
 type ProfessionalExperienceEntryProps = {
   title: string;
@@ -18,6 +19,8 @@ const ProfessionalExperienceEntry = ({
   location,
   children,
 }: ProfessionalExperienceEntryProps) => {
+  const { t } = useLocale();
+
   return (
     <article className="card-experience group cursor-default">
       <header className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
@@ -32,7 +35,7 @@ const ProfessionalExperienceEntry = ({
         <li className="flex items-center gap-2">
           <CalendarIcon className="h-5 w-5 text-primary-500 flex-shrink-0" aria-hidden="true" />
           <span>
-            From {fromDate} to {toDate ?? 'Present'}
+            {t('professionalExperience.dateFrom')} {fromDate} {t('professionalExperience.dateTo')} {toDate ?? t('professionalExperience.datePresent')}
           </span>
         </li>
         <li className="flex items-center gap-2">

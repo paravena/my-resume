@@ -3,6 +3,31 @@ import * as fc from 'fast-check';
 import { JSDOM } from 'jsdom';
 import { render } from '@testing-library/react';
 import App from '../App';
+import { LocaleContext } from '../i18n/LocaleContext';
+import type { LocaleContextValue } from '../i18n/LocaleContext';
+
+const mockLocaleContext: LocaleContextValue = {
+  locale: 'en',
+  setLocale: () => {},
+  t: (key: string) => {
+    const translations: Record<string, string> = {
+      'header.name': 'Pablo Aravena',
+      'header.phone': '+56 9 62810987',
+      'header.email': 'paravena74@gmail.com',
+      'header.linkedin': 'https://linkedin.com/in/paravena74',
+      'header.location': 'Santiago, Chile',
+    };
+    return translations[key] ?? key;
+  },
+  isLoading: false,
+};
+
+const renderWithLocale = (ui: React.ReactElement) =>
+  render(
+    <LocaleContext.Provider value={mockLocaleContext}>
+      {ui}
+    </LocaleContext.Provider>
+  );
 
 /**
  * **Feature: portfolio-design-improvements**
@@ -158,7 +183,7 @@ describe('Header Styling - Property-Based Tests', () => {
             });
 
             // Render the App component
-            const { container } = render(<App />);
+            const { container } = renderWithLocale(<App />);
 
             // Find the header element
             const header = container.querySelector('header');
@@ -189,7 +214,7 @@ describe('Header Styling - Property-Based Tests', () => {
     });
 
     it('should use display or h1 typography classes for the name', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       const nameElement = header?.querySelector('h1');
 
@@ -217,7 +242,7 @@ describe('Header Styling - Property-Based Tests', () => {
         value: 375,
       });
 
-      const { container: mobileContainer } = render(<App />);
+      const { container: mobileContainer } = renderWithLocale(<App />);
       const mobileHeader = mobileContainer.querySelector('header');
       const mobileNameElement = mobileHeader?.querySelector('h1');
       
@@ -233,7 +258,7 @@ describe('Header Styling - Property-Based Tests', () => {
         value: 1280,
       });
 
-      const { container: desktopContainer } = render(<App />);
+      const { container: desktopContainer } = renderWithLocale(<App />);
       const desktopHeader = desktopContainer.querySelector('header');
       const desktopNameElement = desktopHeader?.querySelector('h1');
       
@@ -262,7 +287,7 @@ describe('Header Styling - Property-Based Tests', () => {
             });
 
             // Render the App component
-            const { container } = render(<App />);
+            const { container } = renderWithLocale(<App />);
 
             // Find the header element
             const header = container.querySelector('header');
@@ -295,7 +320,7 @@ describe('Header Styling - Property-Based Tests', () => {
     });
 
     it('should have consistent icon sizing across all header icons', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       
       expect(header).toBeTruthy();
@@ -317,7 +342,7 @@ describe('Header Styling - Property-Based Tests', () => {
     });
 
     it('should use appropriate icon size classes (h-5 w-5)', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       const icons = header?.querySelectorAll('svg');
 
@@ -340,7 +365,7 @@ describe('Header Styling - Property-Based Tests', () => {
 
   describe('Header Integration Tests', () => {
     it('should have proper spacing between name and contact info', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       
       expect(header).toBeTruthy();
@@ -354,7 +379,7 @@ describe('Header Styling - Property-Based Tests', () => {
     });
 
     it('should have semantic header element', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       
       expect(header).toBeTruthy();
@@ -362,7 +387,7 @@ describe('Header Styling - Property-Based Tests', () => {
     });
 
     it('should have proper flex layout for contact info', () => {
-      const { container } = render(<App />);
+      const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       const contactList = header?.querySelector('ul');
       

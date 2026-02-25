@@ -1,211 +1,162 @@
 import ProfessionalExperienceEntry from './ProfessionalExperienceEntry.tsx';
+import { useLocale } from '../../i18n';
 
 const ProfessionalExperience = () => {
+  const { t } = useLocale();
+
   return (
     <section className="flex flex-1 flex-col space-y-6 md:space-y-8">
-      <h2 className="text-h2 md:text-3xl font-semibold text-secondary-800 mb-2">Professional Experience</h2>
+      <h2 className="text-h2 md:text-3xl font-semibold text-secondary-800 mb-2">{t('professionalExperience.title')}</h2>
       <div className="space-y-4 md:space-y-6">
       <ProfessionalExperienceEntry
-        title="Full Stack Developer"
-        location="Remote"
-        companyName="Indeed"
-        fromDate="September 2024"
+        title={t('professionalExperience.indeed.title')}
+        location={t('professionalExperience.indeed.location')}
+        companyName={t('professionalExperience.indeed.company')}
+        fromDate={t('professionalExperience.indeed.fromDate')}
       >
         <p>
-          Working as a Full Stack Developer on the{' '}
-          <a 
-            href="https://indeed.com/career-advice" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >
-            Career Guide
-          </a>{' '}
-          website. I build features using micro frontends with Mosaic (Indeed's in-house technology), 
-          server-side components, batch processes, and GraphQL APIs.
+          {t('professionalExperience.indeed.description')}
         </p>
         <ul className="list-disc px-4 py-2">
-          <li>Build and maintain micro frontend components using React and TypeScript</li>
-          <li>Develop server-side features with Node.js and Java</li>
-          <li>Create and optimize GraphQL APIs for data fetching</li>
-          <li>Implement batch processes for data processing tasks</li>
+          <li>{t('professionalExperience.indeed.activities.0')}</li>
+          <li>{t('professionalExperience.indeed.activities.1')}</li>
+          <li>{t('professionalExperience.indeed.activities.2')}</li>
+          <li>{t('professionalExperience.indeed.activities.3')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
-        title="Full Stack Developer"
-        location="Santiago, Chile (Remote)"
-        fromDate="January 2018"
-        toDate="August 2024"
-        companyName="Toptal.com"
+        title={t('professionalExperience.toptal.title')}
+        location={t('professionalExperience.toptal.location')}
+        fromDate={t('professionalExperience.toptal.fromDate')}
+        toDate={t('professionalExperience.toptal.toDate')}
+        companyName={t('professionalExperience.toptal.company')}
       >
         <p>
-          As a freelance developer at{' '}
-          <a 
-            href="https://toptal.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >Toptal.com</a>, I worked on projects for companies like{' '}
-          <a 
-            href="http://gigsmart.com" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >GigSmart</a>,{' '}
-          <a 
-            href="https://steadyapp.com" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >SteadyApp</a>,{' '}
-          <a 
-            href="http://alteryx.com" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >Alteryx</a>, and{' '}
-          <a 
-            href="https://myhalo.ai" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary-700 hover:text-primary-800 hover:underline transition-colors duration-250 cursor-pointer py-2 -my-2 inline-flex items-center min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded"
-          >Halo By Hines</a>.
+          {t('professionalExperience.toptal.description')}
         </p>
-        <p className="mt-3"><strong>SteadyApp</strong> - React Native mobile app development:</p>
+        <p className="mt-3"><strong>{t('professionalExperience.toptal.steadyApp.title')}</strong> - {t('professionalExperience.toptal.steadyApp.subtitle')}</p>
         <ul className="list-disc px-4 py-1">
-          <li>Built authentication system using Auth0</li>
-          <li>Implemented A/B testing with Optimizely</li>
-          <li>Created integrations with Plaid and Argyle for financial data</li>
-          <li>Developed multiple screens and navigation flows</li>
+          <li>{t('professionalExperience.toptal.steadyApp.activities.0')}</li>
+          <li>{t('professionalExperience.toptal.steadyApp.activities.1')}</li>
+          <li>{t('professionalExperience.toptal.steadyApp.activities.2')}</li>
+          <li>{t('professionalExperience.toptal.steadyApp.activities.3')}</li>
         </ul>
-        <p className="mt-3"><strong>GigSmart</strong> - Backend development with Elixir:</p>
+        <p className="mt-3"><strong>{t('professionalExperience.toptal.gigSmart.title')}</strong> - {t('professionalExperience.toptal.gigSmart.subtitle')}</p>
         <ul className="list-disc px-4 py-1">
-          <li>Built GraphQL mutations and queries using Absinthe</li>
-          <li>Worked with Ecto for database operations</li>
-          <li>APIs consumed by React web apps using Relay</li>
+          <li>{t('professionalExperience.toptal.gigSmart.activities.0')}</li>
+          <li>{t('professionalExperience.toptal.gigSmart.activities.1')}</li>
+          <li>{t('professionalExperience.toptal.gigSmart.activities.2')}</li>
         </ul>
-        <p className="mt-3"><strong>Alteryx</strong> - Internal software license management system:</p>
+        <p className="mt-3"><strong>{t('professionalExperience.toptal.alteryx.title')}</strong> - {t('professionalExperience.toptal.alteryx.subtitle')}</p>
         <ul className="list-disc px-4 py-1">
-          <li>Built backend with Java and Spring Framework</li>
-          <li>Integrated with legacy SOAP-based APIs</li>
-          <li>Implemented caching layer using Redis for better performance</li>
-          <li>Created frontend with React and TypeScript</li>
+          <li>{t('professionalExperience.toptal.alteryx.activities.0')}</li>
+          <li>{t('professionalExperience.toptal.alteryx.activities.1')}</li>
+          <li>{t('professionalExperience.toptal.alteryx.activities.2')}</li>
+          <li>{t('professionalExperience.toptal.alteryx.activities.3')}</li>
         </ul>
-        <p className="mt-3"><strong>Halo by Hines</strong> - AI-powered real estate marketing platform:</p>
+        <p className="mt-3"><strong>{t('professionalExperience.toptal.halo.title')}</strong> - {t('professionalExperience.toptal.halo.subtitle')}</p>
         <ul className="list-disc px-4 py-1">
-          <li>Built MVP web app for creating property advertisements</li>
-          <li>Integrated AI tools to generate marketing content automatically</li>
-          <li>Developed media upload system for property images</li>
-          <li>Created AI-generated visualizations of remodeled interiors and exteriors</li>
+          <li>{t('professionalExperience.toptal.halo.activities.0')}</li>
+          <li>{t('professionalExperience.toptal.halo.activities.1')}</li>
+          <li>{t('professionalExperience.toptal.halo.activities.2')}</li>
+          <li>{t('professionalExperience.toptal.halo.activities.3')}</li>
         </ul>
-        <p className="mt-2">Technologies I used:</p>
+        <p className="mt-2">{t('professionalExperience.toptal.techUsed')}</p>
         <ul className="list-disc px-4 py-2">
-          <li>React, React Native, Next.js, Relay</li>
-          <li>JavaScript, TypeScript, Elixir</li>
-          <li>Node.js, Java, Spring Framework, Python (Django, Flask)</li>
-          <li>Redis, SOAP APIs, AI/ML integrations</li>
-          <li>Auth0, Optimizely, Plaid, Argyle</li>
+          <li>{t('professionalExperience.toptal.techList.0')}</li>
+          <li>{t('professionalExperience.toptal.techList.1')}</li>
+          <li>{t('professionalExperience.toptal.techList.2')}</li>
+          <li>{t('professionalExperience.toptal.techList.3')}</li>
+          <li>{t('professionalExperience.toptal.techList.4')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
-        title="Software Developer"
-        location="Santiago, Chile (Remote)"
-        fromDate="December 2016"
-        toDate="April 2019"
-        companyName="RecoveryPlanner"
+        title={t('professionalExperience.recoveryPlanner.title')}
+        location={t('professionalExperience.recoveryPlanner.location')}
+        fromDate={t('professionalExperience.recoveryPlanner.fromDate')}
+        toDate={t('professionalExperience.recoveryPlanner.toDate')}
+        companyName={t('professionalExperience.recoveryPlanner.company')}
       >
         <p>
-          I designed and built RPX, a web-based risk management application. 
-          I created the frontend using Angular and Material UI. I also built 
-          a mobile app prototype using Ionic and Meteor.
+          {t('professionalExperience.recoveryPlanner.description')}
         </p>
-        <p className="mt-2">Technologies I used:</p>
+        <p className="mt-2">{t('professionalExperience.recoveryPlanner.techUsed')}</p>
         <ul className="list-disc px-4 py-2">
-          <li>Angular, Ionic, Meteor</li>
-          <li>JavaScript, TypeScript</li>
+          <li>{t('professionalExperience.recoveryPlanner.techList.0')}</li>
+          <li>{t('professionalExperience.recoveryPlanner.techList.1')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
-        title="Technical Lead"
-        location="Santiago, Chile"
-        fromDate="January 2013"
-        toDate="September 2016"
-        companyName="Nisum"
+        title={t('professionalExperience.nisum.title')}
+        location={t('professionalExperience.nisum.location')}
+        fromDate={t('professionalExperience.nisum.fromDate')}
+        toDate={t('professionalExperience.nisum.toDate')}
+        companyName={t('professionalExperience.nisum.company')}
       >
-        <p>Key projects I led:</p>
+        <p>{t('professionalExperience.nisum.description')}</p>
         <ul className="space-y-2 mt-2">
           <li>
-            <strong>Macy's DevOps:</strong> Built a deployment workflow system using Activiti BPMN 
-            and Spring Framework to manage software releases across multiple environments.
+            <strong>{t('professionalExperience.nisum.projects.0.title')}</strong> {t('professionalExperience.nisum.projects.0.description')}
           </li>
           <li>
-            <strong>Size & Pack:</strong> Created middleware to process and transform purchase orders 
-            from different systems into a common format. Used Cucumber for testing and practiced TDD.
+            <strong>{t('professionalExperience.nisum.projects.1.title')}</strong> {t('professionalExperience.nisum.projects.1.description')}
           </li>
           <li>
-            <strong>GAP EMV POS:</strong> Upgraded Point of Sale systems to support chip and PIN 
-            credit/debit cards (EMV standard).
+            <strong>{t('professionalExperience.nisum.projects.2.title')}</strong> {t('professionalExperience.nisum.projects.2.description')}
           </li>
         </ul>
-        <p className="mt-2">Technologies I used:</p>
+        <p className="mt-2">{t('professionalExperience.nisum.techUsed')}</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java, Spring Framework</li>
-          <li>JUnit, Cucumber, Maven</li>
+          <li>{t('professionalExperience.nisum.techList.0')}</li>
+          <li>{t('professionalExperience.nisum.techList.1')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
-        title="Senior Developer"
-        location="Santiago, Chile"
-        fromDate="July 2011"
-        toDate="December 2012"
-        companyName="Experian Interactive Media"
+        title={t('professionalExperience.experian.title')}
+        location={t('professionalExperience.experian.location')}
+        fromDate={t('professionalExperience.experian.fromDate')}
+        toDate={t('professionalExperience.experian.toDate')}
+        companyName={t('professionalExperience.experian.company')}
       >
         <p>
-          Built and maintained web applications for lending and marketing. Key projects:
+          {t('professionalExperience.experian.description')}
         </p>
         <ul className="space-y-2 mt-2">
           <li>
-            <strong>LowerMyBills.com:</strong> A loan comparison website that helps users find 
-            the best credit options. The system collects user information, checks credit scores 
-            through external APIs, and shows matching lenders.
+            <strong>{t('professionalExperience.experian.projects.0.title')}</strong> {t('professionalExperience.experian.projects.0.description')}
           </li>
           <li>
-            <strong>Campaign Administration System:</strong> An internal tool for creating and 
-            managing marketing campaigns with workflow support for different team roles.
+            <strong>{t('professionalExperience.experian.projects.1.title')}</strong> {t('professionalExperience.experian.projects.1.description')}
           </li>
         </ul>
-        <p className="mt-2">Technologies I used:</p>
+        <p className="mt-2">{t('professionalExperience.experian.techUsed')}</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java, Spring Framework</li>
-          <li>AngularJS, JUnit, Maven</li>
+          <li>{t('professionalExperience.experian.techList.0')}</li>
+          <li>{t('professionalExperience.experian.techList.1')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       <ProfessionalExperienceEntry
-        title="Senior Developer"
-        location="Santiago, Chile"
-        fromDate="November 2004"
-        toDate="June 2011"
-        companyName="FedEx"
+        title={t('professionalExperience.fedex.title')}
+        location={t('professionalExperience.fedex.location')}
+        fromDate={t('professionalExperience.fedex.fromDate')}
+        toDate={t('professionalExperience.fedex.toDate')}
+        companyName={t('professionalExperience.fedex.company')}
       >
         <p>
-          Built software solutions for the Latin America and Caribbean region. Key projects:
+          {t('professionalExperience.fedex.description')}
         </p>
         <ul className="mt-2 space-y-2">
           <li>
-            <strong>Low Value Module:</strong> A mobile app for processing low-value shipments, 
-            allowing data updates and generating customs reports.
+            <strong>{t('professionalExperience.fedex.projects.0.title')}</strong> {t('professionalExperience.fedex.projects.0.description')}
           </li>
           <li>
-            <strong>FedEx Global Clearance (FGC):</strong> A system that processes shipment 
-            manifest data (list of packages arriving on each flight). I helped create a unified 
-            solution that replaced country-specific systems. Started in Trinidad and Tobago, 
-            then expanded to Costa Rica, Mexico, Brazil, and other countries.
+            <strong>{t('professionalExperience.fedex.projects.1.title')}</strong> {t('professionalExperience.fedex.projects.1.description')}
           </li>
         </ul>
-        <p className="mt-2">Technologies I used:</p>
+        <p className="mt-2">{t('professionalExperience.fedex.techUsed')}</p>
         <ul className="list-disc px-4 py-2">
-          <li>Java, Spring Framework</li>
-          <li>JUnit, Maven, jQuery</li>
+          <li>{t('professionalExperience.fedex.techList.0')}</li>
+          <li>{t('professionalExperience.fedex.techList.1')}</li>
         </ul>
       </ProfessionalExperienceEntry>
       </div>
