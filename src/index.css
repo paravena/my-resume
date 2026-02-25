@@ -88,7 +88,7 @@
   /* Reset page margins */
   @page {
     size: A4 portrait;
-    margin: 10mm;
+    margin: 8mm;
   }
 
   /* Ensure body takes full width */
@@ -99,7 +99,7 @@
     font-size: 10px !important;
   }
 
-  /* Container adjustments for print */
+  /* Container adjustments for print - remove toolbar top padding */
   .container {
     max-width: 100% !important;
     padding: 0 !important;
@@ -110,8 +110,10 @@
   main {
     display: flex !important;
     flex-direction: row !important;
-    gap: 1rem !important;
+    gap: 0.75rem !important;
     align-items: flex-start !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   /* Main content column - takes 65% */
@@ -124,7 +126,7 @@
   main > aside {
     flex: 0 0 34% !important;
     max-width: 34% !important;
-    padding: 0.75rem !important;
+    padding: 0.5rem !important;
     height: auto !important;
     min-height: 0 !important;
   }
@@ -142,7 +144,7 @@
 
   /* Ensure backgrounds print */
   .bg-primary-50, .bg-primary-100, .bg-white,
-  .bg-gradient-to-br {
+  .bg-gradient-to-br, .from-primary-50, .to-primary-100 {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -153,78 +155,112 @@
     page-break-inside: avoid;
   }
 
-  /* Reduce spacing for print */
-  .space-y-6, .space-y-8 {
-    gap: 0.5rem !important;
+  /* Fix space-y-* classes - they use margin-top on children, not gap */
+  .space-y-6 > * + *,
+  .space-y-8 > * + * {
+    margin-top: 0.35rem !important;
   }
 
-  .space-y-4 {
+  .space-y-3 > * + *,
+  .space-y-4 > * + * {
+    margin-top: 0.25rem !important;
+  }
+
+  /* Also fix gap utilities */
+  .gap-4, .gap-6, .gap-8 {
     gap: 0.4rem !important;
   }
 
-  .gap-4, .gap-6, .gap-8 {
-    gap: 0.5rem !important;
-  }
-
-  /* Smaller text for print to fit more content */
-  h2 {
-    font-size: 1rem !important;
+  /* Heading sizes for print */
+  h1 {
+    font-size: 1.3rem !important;
     margin-bottom: 0.25rem !important;
   }
 
-  h3 {
-    font-size: 0.9rem !important;
+  h2 {
+    font-size: 0.95rem !important;
     margin-bottom: 0.2rem !important;
   }
 
-  p, li {
-    font-size: 0.75rem !important;
-    line-height: 1.35 !important;
+  h3 {
+    font-size: 0.85rem !important;
     margin-bottom: 0.15rem !important;
   }
 
-  ul {
-    margin: 0.2rem 0 !important;
-    padding-left: 1rem !important;
+  p, li, span {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
   }
 
-  /* Ensure links show their URL or are styled appropriately */
+  ul {
+    margin: 0.15rem 0 !important;
+    padding-left: 0.9rem !important;
+  }
+
+  /* Ensure links are styled appropriately */
   a {
     text-decoration: none !important;
+    font-size: 0.72rem !important;
   }
 
   /* Reduce padding in experience entries */
   .card-experience {
-    padding: 0.5rem !important;
-    margin-bottom: 0.4rem !important;
+    padding: 0.4rem !important;
+    margin-bottom: 0.3rem !important;
+    border-width: 1px !important;
   }
 
   /* Compact the header for print */
   header {
-    margin-bottom: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
+    margin-bottom: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
   }
 
-  /* Reduce padding on main content area */
+  /* Remove all top/bottom padding overrides from toolbar spacing */
+  .pt-16, .pt-12, .md\:pt-20 {
+    padding-top: 0 !important;
+  }
+
+  .pb-8, .md\:pb-12 {
+    padding-bottom: 0 !important;
+  }
+
   .py-8, .py-4, .md\:py-8, .md\:py-12 {
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   /* Sidebar sections spacing */
   main > aside > section,
   main > aside > div {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.35rem !important;
   }
 
-  /* Pills/tags in sidebar - more compact */
+  /* Technology pills/tags - more compact (they use rounded-md, not rounded-full) */
+  .rounded-md {
+    padding: 0.1rem 0.4rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Also handle rounded-full just in case */
   .rounded-full {
-    padding: 0.15rem 0.5rem !important;
-    font-size: 0.7rem !important;
+    padding: 0.1rem 0.4rem !important;
+    font-size: 0.65rem !important;
   }
 
   /* Summary section */
   section:first-of-type {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  /* Contact info in header - compact */
+  header ul {
+    gap: 0.3rem 0.6rem !important;
+  }
+
+  /* Sidebar border-t sections */
+  .border-t-2 {
+    border-top-width: 1px !important;
+    padding-top: 0.25rem !important;
   }
 }
