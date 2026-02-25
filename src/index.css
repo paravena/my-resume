@@ -5,6 +5,8 @@
 @font-face {
     font-family: 'Wittgenstain';
     src: url("./assets/fonts/Wittgenstein/Wittgenstein-VariableFont_wght.ttf") format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
 }
 
 /* Keyframe Animations */
