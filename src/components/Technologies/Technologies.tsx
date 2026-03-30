@@ -5,8 +5,10 @@ const Technologies = () => {
   const { t } = useLocale();
 
   return (
-    <section className="space-y-3 md:space-y-4 pt-4 md:pt-6 border-t-2 border-primary-200/60">
-      <h2 className="text-xl sm:text-h2 font-semibold text-secondary-800">{t('technologies.title')}</h2>
+    <section className="space-y-3 border-t-2 border-primary-200/60 pt-4 md:space-y-4 md:pt-6">
+      <h2 className="text-xl font-semibold text-secondary-800 sm:text-h2">
+        {t('technologies.title')}
+      </h2>
       <ul className="flex flex-col gap-4 md:gap-6">
         <li>
           <TechnologyList
@@ -42,7 +44,7 @@ const Technologies = () => {
         <li>
           <TechnologyList
             title={t('technologies.databases.title')}
-            items={['Postgres', 'Oracle', 'Mysql', 'MongoDB']}
+            items={['Postgres', 'Oracle', 'Mysql', 'MongoDB', 'Contentful']}
           />
         </li>
         <li>
@@ -66,6 +68,5 @@ const Technologies = () => {
     </section>
   );
 };
-
 
 export default Technologies;
