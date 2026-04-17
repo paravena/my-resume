@@ -152,7 +152,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
                     }
                   }
                 });
-              } catch (e) {
+              } catch {
                 // Some stylesheets may not be accessible
               }
             });
@@ -230,7 +230,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
                     }
                   }
                 });
-              } catch (e) {
+              } catch {
                 // Some stylesheets may not be accessible
               }
             });
@@ -288,7 +288,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
               }
             }
           });
-        } catch (e) {
+        } catch {
           // Some stylesheets may not be accessible
         }
       });
@@ -334,7 +334,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
               }
             }
           });
-        } catch (e) {
+        } catch {
           // Some stylesheets may not be accessible
         }
       });
@@ -380,7 +380,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
               }
             }
           });
-        } catch (e) {
+        } catch {
           // Some stylesheets may not be accessible
         }
       });
@@ -432,7 +432,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
               }
             }
           });
-        } catch (e) {
+        } catch {
           // Some stylesheets may not be accessible
         }
       });
@@ -495,7 +495,7 @@ describe('Reduced Motion Respect - Property-Based Tests', () => {
               }
             }
           });
-        } catch (e) {
+        } catch {
           // Some stylesheets may not be accessible
         }
       });

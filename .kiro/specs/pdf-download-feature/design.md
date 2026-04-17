@@ -166,7 +166,6 @@ const generatePDF = async (
 **Service Functions:**
 
 1. **generatePDF(options)**: Main function to generate PDF
-
    - Validates input element
    - Configures html2canvas options
    - Captures DOM as canvas
@@ -175,14 +174,12 @@ const generatePDF = async (
    - Returns result with success/error
 
 2. **captureElement(element, options)**: Captures HTML element as canvas
-
    - Configures html2canvas with proper scale and options
    - Handles font loading
    - Preserves CSS styling
    - Returns canvas element
 
 3. **createPDFFromCanvas(canvas, options)**: Converts canvas to PDF
-
    - Calculates optimal dimensions
    - Handles pagination for multi-page content
    - Adds PDF metadata
@@ -224,7 +221,6 @@ A utility module to optimize the layout for PDF generation.
 **Functions:**
 
 1. **preparePrintLayout(element)**: Prepares element for PDF capture
-
    - Removes animations and transitions
    - Adjusts responsive classes for print
    - Ensures proper page breaks
@@ -471,31 +467,26 @@ _For any_ focus state on the download button, a visible focus indicator should b
 ### Error Categories
 
 1. **Element Not Found**: Target element for PDF generation doesn't exist
-
    - Detection: Check if ref.current is null before generation
    - Handling: Display error message, log error, prevent generation attempt
    - User Action: Refresh page and try again
 
 2. **Canvas Generation Failed**: html2canvas fails to capture element
-
    - Detection: Catch errors from html2canvas promise
    - Handling: Log error details, display user-friendly message
    - User Action: Try again, check browser compatibility
 
 3. **PDF Creation Failed**: jsPDF fails to create document
-
    - Detection: Catch errors from jsPDF operations
    - Handling: Log error details, display user-friendly message
    - User Action: Try again, reduce content complexity
 
 4. **Download Failed**: Browser blocks or fails to download
-
    - Detection: Catch errors from download trigger
    - Handling: Provide instructions to allow downloads
    - User Action: Check browser settings, allow downloads
 
 5. **Browser Not Supported**: Required APIs not available
-
    - Detection: Feature detection on component mount
    - Handling: Display compatibility message
    - User Action: Use a modern browser (Chrome, Firefox, Safari, Edge)

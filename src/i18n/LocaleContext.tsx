@@ -10,6 +10,7 @@ export interface LocaleContextValue {
   isLoading: boolean;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 function getInitialLocale(): SupportedLocale {

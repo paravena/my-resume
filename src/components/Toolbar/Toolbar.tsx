@@ -3,7 +3,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import DownloadButton from '../DownloadButton/DownloadButton';
 
 interface ToolbarProps {
-  targetRef: React.RefObject<HTMLElement>;
+  targetRef: React.RefObject<HTMLElement | null>;
   pdfFilename?: string;
 }
 

@@ -8,6 +8,74 @@ import {
 import { useLocale } from '../../i18n';
 
 /**
+ * Loading spinner SVG component.
+ * Displays an animated spinner when PDF generation is in progress.
+ */
+const LoadingSpinner = () => (
+  <svg
+    className="-ml-1 mr-1.5 h-4 w-4 animate-spin text-white sm:mr-2 sm:h-5 sm:w-5"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    />
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    />
+  </svg>
+);
+
+/**
+ * Download icon SVG component.
+ * Displays when the button is in idle state.
+ */
+const DownloadIcon = () => (
+  <svg
+    className="-ml-1 mr-1.5 h-4 w-4 sm:mr-2 sm:h-5 sm:w-5"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    aria-hidden="true"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+    />
+  </svg>
+);
+
+/**
+ * Success checkmark icon SVG component.
+ * Displays briefly after successful PDF generation.
+ */
+const SuccessIcon = () => (
+  <svg
+    className="-ml-1 mr-1.5 h-4 w-4 animate-[scale-in_0.2s_ease-out] text-white sm:mr-2 sm:h-5 sm:w-5"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2.5}
+    aria-hidden="true"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+/**
  * Props interface for the DownloadButton component.
  *
  * @property targetRef - Reference to the HTML element to be captured for PDF generation
@@ -18,7 +86,7 @@ import { useLocale } from '../../i18n';
  */
 export interface DownloadButtonProps {
   /** Reference to the HTML element to be captured for PDF generation */
-  targetRef: React.RefObject<HTMLElement>;
+  targetRef: React.RefObject<HTMLElement | null>;
   /** Filename for the downloaded PDF (default: 'resume.pdf') */
   filename?: string;
   /** Optional CSS class name for custom styling */
@@ -80,14 +148,6 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
   /**
-   * State for storing browser support detection result.
-   * Used to determine if the browser supports all required features for PDF generation.
-   * Validates: Requirements 5.4
-   */
-  const [browserSupport, setBrowserSupport] =
-    useState<BrowserSupportResult | null>(null);
-
-  /**
    * State for tracking if the operation is taking longer than expected (> 2 seconds).
    * When true, an enhanced progress indicator is displayed to provide additional feedback.
    * Validates: Requirements 6.3
@@ -126,14 +186,12 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
   const isGeneratingRef = useRef<boolean>(false);
 
   /**
-   * Effect hook to run browser feature detection on component mount.
-   * Checks for canvas, blob, and download API support.
+   * Run browser feature detection on component mount.
    * Validates: Requirements 5.4
    */
-  useEffect(() => {
-    const support = checkBrowserSupport();
-    setBrowserSupport(support);
-  }, []);
+  const [browserSupport] = useState<BrowserSupportResult>(() =>
+    checkBrowserSupport(),
+  );
 
   /**
    * Effect hook to manage the long operation detection timer.
@@ -153,8 +211,10 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
           setElapsedSeconds(prev => prev + 1);
         }, 1000);
       }, 2000);
-    } else {
-      // Clean up timers when generation completes
+    }
+
+    // Cleanup function: reset timers and state when isGenerating changes or unmounts
+    return () => {
       if (longOperationTimeoutRef.current) {
         clearTimeout(longOperationTimeoutRef.current);
         longOperationTimeoutRef.current = null;
@@ -163,19 +223,8 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
         clearInterval(elapsedIntervalRef.current);
         elapsedIntervalRef.current = null;
       }
-      // Reset long operation state
       setIsLongOperation(false);
       setElapsedSeconds(0);
-    }
-
-    // Cleanup function
-    return () => {
-      if (longOperationTimeoutRef.current) {
-        clearTimeout(longOperationTimeoutRef.current);
-      }
-      if (elapsedIntervalRef.current) {
-        clearInterval(elapsedIntervalRef.current);
-      }
     };
   }, [isGenerating]);
 
@@ -273,137 +322,6 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       isGeneratingRef.current = false;
     }
   };
-
-  /**
-   * Loading spinner SVG component.
-   * Displays an animated spinner when PDF generation is in progress.
-   * Responsive sizing: smaller on mobile, larger on desktop.
-   * Validates: Requirements 3.2
-   */
-  const LoadingSpinner = () => (
-    <svg
-      className="-ml-1 mr-1.5 h-4 w-4 animate-spin text-white sm:mr-2 sm:h-5 sm:w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
-  );
-
-  /**
-   * Download icon SVG component.
-   * Displays when the button is in idle state.
-   * Responsive sizing: smaller on mobile, larger on desktop.
-   */
-  const DownloadIcon = () => (
-    <svg
-      className="-ml-1 mr-1.5 h-4 w-4 sm:mr-2 sm:h-5 sm:w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-      />
-    </svg>
-  );
-
-  /**
-   * Success checkmark icon SVG component.
-   * Displays briefly after successful PDF generation.
-   * Includes a scale animation for visual feedback.
-   * Validates: Requirements 3.5
-   */
-  const SuccessIcon = () => (
-    <svg
-      className="-ml-1 mr-1.5 h-4 w-4 animate-[scale-in_0.2s_ease-out] text-white sm:mr-2 sm:h-5 sm:w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  );
-
-  /**
-   * Enhanced progress indicator component for long operations.
-   * Displays when PDF generation takes longer than 2 seconds.
-   * Shows elapsed time and a pulsing animation to indicate ongoing progress.
-   * Validates: Requirements 6.3
-   */
-  const LongOperationProgress = () => (
-    <div
-      className="mt-3 flex flex-col items-start"
-      role="status"
-      aria-live="polite"
-      data-testid="long-operation-progress"
-    >
-      <div className="flex max-w-md items-center rounded-lg border border-blue-200 bg-blue-50 p-3">
-        {/* Animated progress indicator */}
-        <div className="mr-3 flex items-center">
-          <div className="relative">
-            {/* Outer pulsing ring */}
-            <div className="absolute inset-0 animate-ping rounded-full bg-blue-400 opacity-25" />
-            {/* Inner spinning circle */}
-            <svg
-              className="relative h-6 w-6 animate-spin text-blue-600"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              />
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="text-sm font-medium text-blue-800">
-            {t('downloadButton.longOperation.title')}
-          </p>
-          <p className="mt-0.5 text-xs text-blue-600">
-            {t('downloadButton.longOperation.elapsed').replace(
-              '{seconds}',
-              String(elapsedSeconds),
-            )}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
 
   /**
    * Determines the status message for screen reader announcements.
@@ -541,7 +459,57 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       {/* Long operation progress indicator */}
       {/* Displays when PDF generation takes > 2 seconds */}
       {/* Validates: Requirements 6.3 */}
-      {isGenerating && isLongOperation && <LongOperationProgress />}
+      {isGenerating && isLongOperation && (
+        <div
+          className="mt-3 flex flex-col items-start"
+          role="status"
+          aria-live="polite"
+          data-testid="long-operation-progress"
+        >
+          <div className="flex max-w-md items-center rounded-lg border border-blue-200 bg-blue-50 p-3">
+            {/* Animated progress indicator */}
+            <div className="mr-3 flex items-center">
+              <div className="relative">
+                {/* Outer pulsing ring */}
+                <div className="absolute inset-0 animate-ping rounded-full bg-blue-400 opacity-25" />
+                {/* Inner spinning circle */}
+                <svg
+                  className="relative h-6 w-6 animate-spin text-blue-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <p className="text-sm font-medium text-blue-800">
+                {t('downloadButton.longOperation.title')}
+              </p>
+              <p className="mt-0.5 text-xs text-blue-600">
+                {t('downloadButton.longOperation.elapsed').replace(
+                  '{seconds}',
+                  String(elapsedSeconds),
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Error message and retry button */}
       {/* Validates: Requirements 3.4, 7.3 */}

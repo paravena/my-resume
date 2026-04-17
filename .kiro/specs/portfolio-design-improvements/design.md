@@ -309,7 +309,6 @@ transitionTimingFunction: {
 **Implementation**:
 
 1. **Color Contrast**:
-
    - Text on white: Use `secondary-700` or darker (7:1 ratio)
    - Text on colored backgrounds: Ensure 4.5:1 minimum
    - Links: Use `primary-600` with underline on hover
@@ -614,25 +613,21 @@ Property-based tests will verify universal design properties using automated tes
 **Property Test Categories**:
 
 1. **Accessibility Properties** (Properties 1, 2, 18, 19, 20):
-
    - Generate random color combinations and verify contrast ratios
    - Generate random DOM structures and verify heading hierarchy
    - Verify focus states on all interactive elements
 
 2. **Responsive Properties** (Properties 8, 9, 10, 11, 12):
-
    - Test layout behavior across random viewport widths
    - Verify font size and spacing adjustments at different breakpoints
    - Test touch target sizes on mobile viewports
 
 3. **Animation Properties** (Properties 13, 14, 15):
-
    - Verify transition properties on all interactive elements
    - Test animation durations are within bounds
    - Verify reduced motion preferences are respected
 
 4. **Visual Styling Properties** (Properties 3, 4, 5, 6, 7, 21, 22, 23, 24, 25, 26, 27):
-
    - Test spacing consistency across components
    - Verify visual hierarchy in headings and content
    - Test card styling properties on experience entries

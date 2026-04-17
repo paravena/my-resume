@@ -7,14 +7,12 @@ This implementation plan breaks down the PDF download feature into discrete, inc
 ## Tasks
 
 - [x] 1. Install dependencies and set up type definitions
-
   - Install html2canvas and jspdf packages
   - Install @types/html2canvas for TypeScript support
   - Verify packages are added to package.json
   - _Requirements: 5.1, 5.3_
 
 - [x] 2. Create PDF generation service module
-
   - [x] 2.1 Create PDFService.ts with core types and interfaces
     - Define PDFGenerationOptions interface
     - Define PDFGenerationResult interface
@@ -66,7 +64,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - **Validates: Requirements 1.1, 1.3**
 
 - [x] 3. Create error handling module
-
   - [x] 3.1 Define error types and PDFGenerationError class
     - Create PDFErrorType enum with all error categories
     - Create PDFGenerationError class extending Error
@@ -91,7 +88,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - **Validates: Requirements 7.1**
 
 - [x] 4. Create print layout optimization utility
-
   - [x] 4.1 Implement preparePrintLayout function
     - Accept HTMLElement
     - Store original classes and styles
@@ -115,11 +111,9 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - _Requirements: 1.2, 2.4_
 
 - [x] 5. Checkpoint - Ensure PDF service tests pass
-
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 6. Create DownloadButton component
-
   - [x] 6.1 Create DownloadButton.tsx with props interface
     - Define DownloadButtonProps interface
     - Include targetRef, filename, className, callbacks
@@ -168,7 +162,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - _Requirements: 3.2, 3.3, 3.4_
 
 - [x] 7. Add accessibility features to DownloadButton
-
   - [x] 7.1 Add ARIA labels and attributes
     - Add aria-label describing button purpose
     - Add aria-busy during loading state
@@ -207,7 +200,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - **Validates: Requirements 8.4**
 
 - [x] 8. Add browser compatibility and feature detection
-
   - [x] 8.1 Implement feature detection utility
     - Check for canvas support
     - Check for blob support
@@ -237,7 +229,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - _Requirements: 5.1, 5.4_
 
 - [ ] 9. Integrate DownloadButton into App component
-
   - [x] 9.1 Add ref to resume container in App.tsx
     - Create resumeRef using useRef<HTMLDivElement>
     - Attach ref to main container div
@@ -262,7 +253,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - _Requirements: 1.1, 1.3_
 
 - [ ] 10. Add performance optimizations
-
   - [x] 10.1 Implement async PDF generation
     - Ensure generatePDF is fully async
     - Use async/await throughout
@@ -290,11 +280,9 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - _Requirements: 3.3_
 
 - [x] 11. Checkpoint - Ensure all tests pass
-
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 12. Add remaining property tests
-
   - [ ]\* 12.1 Write property test for custom font preservation
     - **Property 4: Custom Font Preservation**
     - **Validates: Requirements 2.1**
@@ -306,7 +294,6 @@ This implementation plan breaks down the PDF download feature into discrete, inc
     - **Validates: Requirements 4.1**
 
 - [ ] 13. Final integration and polish
-
   - [ ] 13.1 Test complete user flow
     - Load application
     - Click download button
