@@ -34,6 +34,7 @@ No new dependencies are required for this design.
 **Design Decision**: Replace the basic blue color scheme with a modern, professional palette that provides depth and visual interest.
 
 **Color Palette**:
+
 ```typescript
 // Tailwind config extension
 colors: {
@@ -77,6 +78,7 @@ colors: {
 ```
 
 **Usage**:
+
 - Primary colors: Main interactive elements, links, icons
 - Secondary colors: Text, borders, subtle backgrounds
 - Accent colors: Highlights, special emphasis (used sparingly)
@@ -86,6 +88,7 @@ colors: {
 **Design Decision**: Create a clear typographic hierarchy using the existing Wittgenstein font with enhanced sizing and spacing.
 
 **Typography Scale**:
+
 ```typescript
 // Tailwind config extension
 fontSize: {
@@ -101,6 +104,7 @@ fontSize: {
 ```
 
 **Component Mapping**:
+
 - Name (Header): `display` or `h1`
 - Section Headings: `h2`
 - Subsection Headings: `h3`
@@ -112,6 +116,7 @@ fontSize: {
 **Design Decision**: Use consistent spacing based on Tailwind's default scale with custom additions for specific needs.
 
 **Spacing Scale** (extends Tailwind defaults):
+
 ```typescript
 spacing: {
   '18': '4.5rem',   // 72px
@@ -122,6 +127,7 @@ spacing: {
 ```
 
 **Spacing Guidelines**:
+
 - Section spacing: `space-y-8` to `space-y-12` (2-3rem)
 - Component spacing: `space-y-4` to `space-y-6` (1-1.5rem)
 - Element spacing: `space-y-2` to `space-y-3` (0.5-0.75rem)
@@ -133,6 +139,7 @@ spacing: {
 **Design Decision**: Maintain the two-column layout for desktop with responsive stacking for mobile.
 
 **Desktop Layout** (≥768px):
+
 ```
 ┌─────────────────────────────────────────────────────┐
 │                    Header                           │
@@ -148,6 +155,7 @@ spacing: {
 ```
 
 **Mobile Layout** (<768px):
+
 ```
 ┌─────────────────────┐
 │      Header         │
@@ -165,6 +173,7 @@ spacing: {
 ```
 
 **Implementation**:
+
 - Use Tailwind's `flex` with `flex-col md:flex-row` for responsive layout
 - Main content: `flex-1` or `md:w-2/3`
 - Sidebar: `md:w-1/3 md:max-w-md`
@@ -174,15 +183,16 @@ spacing: {
 **Design Decision**: Use card-based design with subtle shadows and rounded corners for modern appearance.
 
 **Card Styles**:
+
 ```css
 /* Base Card */
 .card-base {
-  @apply rounded-lg bg-white shadow-sm border border-secondary-200;
+  @apply rounded-lg border border-secondary-200 bg-white shadow-sm;
 }
 
 /* Elevated Card */
 .card-elevated {
-  @apply rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow duration-300;
+  @apply rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg;
 }
 
 /* Sidebar Card */
@@ -192,12 +202,12 @@ spacing: {
 
 /* Experience Entry Card */
 .card-experience {
-  @apply rounded-lg bg-white p-6 shadow-sm border border-secondary-200 
-         hover:shadow-md hover:border-primary-300 transition-all duration-300;
+  @apply rounded-lg border border-secondary-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-primary-300 hover:shadow-md;
 }
 ```
 
 **Shadow System**:
+
 - `shadow-sm`: Subtle elevation (cards, containers)
 - `shadow-md`: Medium elevation (hover states)
 - `shadow-lg`: High elevation (active/focused states)
@@ -208,6 +218,7 @@ spacing: {
 **Design Decision**: Use smooth, subtle animations that enhance UX without causing distraction.
 
 **Transition Utilities**:
+
 ```typescript
 // Tailwind config extension
 transitionDuration: {
@@ -223,6 +234,7 @@ transitionTimingFunction: {
 **Animation Patterns**:
 
 1. **Hover Transitions**:
+
 ```css
 /* Links */
 .link-hover {
@@ -231,7 +243,7 @@ transitionTimingFunction: {
 
 /* Cards */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
 }
 
 /* Buttons/Interactive */
@@ -241,6 +253,7 @@ transitionTimingFunction: {
 ```
 
 2. **Focus States**:
+
 ```css
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
@@ -248,6 +261,7 @@ transitionTimingFunction: {
 ```
 
 3. **Fade-in Animation** (for page load):
+
 ```css
 @keyframes fadeIn {
   from {
@@ -274,6 +288,7 @@ transitionTimingFunction: {
 **Design Decision**: Use Tailwind's default breakpoints with mobile-first approach.
 
 **Breakpoints**:
+
 - `sm`: 640px (small tablets)
 - `md`: 768px (tablets, layout switch point)
 - `lg`: 1024px (laptops)
@@ -281,6 +296,7 @@ transitionTimingFunction: {
 - `2xl`: 1536px (large desktops)
 
 **Key Responsive Changes**:
+
 - Layout: Single column → Two columns at `md`
 - Font sizes: Smaller → Larger at `md` and `lg`
 - Spacing: Compact → Generous at `md`
@@ -293,19 +309,21 @@ transitionTimingFunction: {
 **Implementation**:
 
 1. **Color Contrast**:
+
    - Text on white: Use `secondary-700` or darker (7:1 ratio)
    - Text on colored backgrounds: Ensure 4.5:1 minimum
    - Links: Use `primary-600` with underline on hover
 
 2. **Focus Indicators**:
+
 ```css
 .focus-visible {
-  @apply focus-visible:outline-none focus-visible:ring-2 
-         focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
 }
 ```
 
 3. **Reduced Motion**:
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -327,10 +345,9 @@ transitionTimingFunction: {
 
 No new data models are required. The existing component props and data structures remain unchanged. This is purely a visual/styling enhancement.
 
-
 ## Correctness Properties
 
-*A property is a characteristic or behavior that should hold true across all valid executions of a system—essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
+_A property is a characteristic or behavior that should hold true across all valid executions of a system—essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees._
 
 For this design improvement feature, properties focus on verifying that the visual design system is correctly implemented across all components and viewport sizes. These properties ensure accessibility compliance, responsive behavior, consistent styling, and proper interactive feedback.
 
@@ -338,43 +355,43 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 1: Color Contrast Compliance**
 
-*For any* text element and its background color combination used in the application, the contrast ratio SHALL meet WCAG AA standards (minimum 4.5:1 for normal text, minimum 3:1 for large text ≥18px or ≥14px bold).
+_For any_ text element and its background color combination used in the application, the contrast ratio SHALL meet WCAG AA standards (minimum 4.5:1 for normal text, minimum 3:1 for large text ≥18px or ≥14px bold).
 
 **Validates: Requirements 1.3, 10.1, 10.2**
 
 **Property 2: Heading Hierarchy Validity**
 
-*For any* page render, the heading elements SHALL follow proper hierarchical order (h1 → h2 → h3) without skipping levels, ensuring semantic document structure.
+_For any_ page render, the heading elements SHALL follow proper hierarchical order (h1 → h2 → h3) without skipping levels, ensuring semantic document structure.
 
 **Validates: Requirements 2.1**
 
 **Property 3: Consistent Spacing Scale**
 
-*For any* two adjacent sections or components, the spacing between them SHALL use values from the defined spacing scale (0.5rem, 0.75rem, 1rem, 1.5rem, 2rem, 2.5rem, 3rem), ensuring visual consistency.
+_For any_ two adjacent sections or components, the spacing between them SHALL use values from the defined spacing scale (0.5rem, 0.75rem, 1rem, 1.5rem, 2rem, 2.5rem, 3rem), ensuring visual consistency.
 
 **Validates: Requirements 3.1**
 
 **Property 4: Section Heading Visual Distinction**
 
-*For any* section heading (h2 element) and body text (p element) within the same section, the heading SHALL have a larger font-size or greater font-weight than the body text, creating clear visual hierarchy.
+_For any_ section heading (h2 element) and body text (p element) within the same section, the heading SHALL have a larger font-size or greater font-weight than the body text, creating clear visual hierarchy.
 
 **Validates: Requirements 4.3, 8.2**
 
 **Property 5: Sidebar Visual Distinction**
 
-*For any* viewport width ≥768px, the sidebar column SHALL have a different background-color than the main content column, creating visual distinction between the two areas.
+_For any_ viewport width ≥768px, the sidebar column SHALL have a different background-color than the main content column, creating visual distinction between the two areas.
 
 **Validates: Requirements 4.4, 7.3**
 
 **Property 6: Experience Entry Visual Separation**
 
-*For any* professional experience entry, the entry SHALL have at least one of the following: border, box-shadow, or margin-bottom ≥1rem, ensuring visual separation between entries.
+_For any_ professional experience entry, the entry SHALL have at least one of the following: border, box-shadow, or margin-bottom ≥1rem, ensuring visual separation between entries.
 
 **Validates: Requirements 4.5**
 
 **Property 7: Name Prominence in Header**
 
-*For any* element within the header section, the name element SHALL have the largest font-size value, establishing it as the primary visual element.
+_For any_ element within the header section, the name element SHALL have the largest font-size value, establishing it as the primary visual element.
 
 **Validates: Requirements 4.2**
 
@@ -382,31 +399,31 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 8: Mobile Layout Stacking**
 
-*For any* viewport width <768px, the main layout container SHALL use flex-direction: column (or equivalent single-column layout), stacking content vertically.
+_For any_ viewport width <768px, the main layout container SHALL use flex-direction: column (or equivalent single-column layout), stacking content vertically.
 
 **Validates: Requirements 5.1**
 
 **Property 9: Responsive Font Sizing**
 
-*For any* heading or body text element, the computed font-size at viewport width <768px SHALL be less than or equal to the computed font-size at viewport width ≥768px, optimizing readability for mobile devices.
+_For any_ heading or body text element, the computed font-size at viewport width <768px SHALL be less than or equal to the computed font-size at viewport width ≥768px, optimizing readability for mobile devices.
 
 **Validates: Requirements 5.2**
 
 **Property 10: Responsive Spacing Adjustment**
 
-*For any* section or container element, the padding or margin values at viewport width <768px SHALL be less than or equal to the values at viewport width ≥768px, optimizing space usage on smaller screens.
+_For any_ section or container element, the padding or margin values at viewport width <768px SHALL be less than or equal to the values at viewport width ≥768px, optimizing space usage on smaller screens.
 
 **Validates: Requirements 5.3**
 
 **Property 11: Touch Target Minimum Size**
 
-*For any* interactive element (links, buttons) on mobile viewport (<768px), the element SHALL have minimum dimensions of 44px × 44px (or equivalent touch-friendly size through padding), ensuring accessibility for touch input.
+_For any_ interactive element (links, buttons) on mobile viewport (<768px), the element SHALL have minimum dimensions of 44px × 44px (or equivalent touch-friendly size through padding), ensuring accessibility for touch input.
 
 **Validates: Requirements 5.4**
 
 **Property 12: Desktop Two-Column Layout**
 
-*For any* viewport width ≥768px, the main content area SHALL display as a two-column layout with the main column occupying approximately 60-65% width and the sidebar occupying approximately 35-40% width.
+_For any_ viewport width ≥768px, the main content area SHALL display as a two-column layout with the main column occupying approximately 60-65% width and the sidebar occupying approximately 35-40% width.
 
 **Validates: Requirements 3.4**
 
@@ -414,31 +431,31 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 13: Interactive Element Transitions**
 
-*For any* interactive element (links, buttons, cards with hover states), the element SHALL have a CSS transition property defined with duration between 150ms and 350ms, ensuring smooth visual feedback.
+_For any_ interactive element (links, buttons, cards with hover states), the element SHALL have a CSS transition property defined with duration between 150ms and 350ms, ensuring smooth visual feedback.
 
 **Validates: Requirements 6.1, 6.3**
 
 **Property 14: Animation Duration Bounds**
 
-*For any* element with CSS transition or animation properties, the duration value SHALL be between 150ms and 300ms, ensuring optimal perceived performance.
+_For any_ element with CSS transition or animation properties, the duration value SHALL be between 150ms and 300ms, ensuring optimal perceived performance.
 
 **Validates: Requirements 6.4**
 
 **Property 15: Reduced Motion Respect**
 
-*For any* animated or transitioned element, when the user's system has prefers-reduced-motion: reduce set, the animation-duration and transition-duration SHALL be reduced to ≤10ms or animations SHALL be disabled, respecting user accessibility preferences.
+_For any_ animated or transitioned element, when the user's system has prefers-reduced-motion: reduce set, the animation-duration and transition-duration SHALL be reduced to ≤10ms or animations SHALL be disabled, respecting user accessibility preferences.
 
 **Validates: Requirements 6.6, 10.6**
 
 **Property 16: Link Hover Visual Feedback**
 
-*For any* link element, the element SHALL have a :hover pseudo-class style that changes either color or text-decoration, providing clear visual feedback for interactivity.
+_For any_ link element, the element SHALL have a :hover pseudo-class style that changes either color or text-decoration, providing clear visual feedback for interactivity.
 
 **Validates: Requirements 7.5, 11.1**
 
 **Property 17: Clickable Cursor Indication**
 
-*For any* interactive element (links, buttons), the element SHALL have cursor: pointer style, indicating clickability to users.
+_For any_ interactive element (links, buttons), the element SHALL have cursor: pointer style, indicating clickability to users.
 
 **Validates: Requirements 11.4**
 
@@ -446,19 +463,19 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 18: Focus Indicator Visibility**
 
-*For any* interactive element, the element SHALL have visible focus styles (outline, ring, or border) defined for :focus or :focus-visible pseudo-classes, ensuring keyboard navigation accessibility.
+_For any_ interactive element, the element SHALL have visible focus styles (outline, ring, or border) defined for :focus or :focus-visible pseudo-classes, ensuring keyboard navigation accessibility.
 
 **Validates: Requirements 10.3, 11.5**
 
 **Property 19: Keyboard Accessibility**
 
-*For any* interactive element, the element SHALL be either a naturally focusable HTML element (a, button, input) or have a tabindex attribute, ensuring keyboard accessibility.
+_For any_ interactive element, the element SHALL be either a naturally focusable HTML element (a, button, input) or have a tabindex attribute, ensuring keyboard accessibility.
 
 **Validates: Requirements 10.4**
 
 **Property 20: Semantic HTML Structure**
 
-*For any* page render, the DOM SHALL contain semantic HTML5 elements (header, main, section, nav, article) for major structural components, supporting screen reader navigation.
+_For any_ page render, the DOM SHALL contain semantic HTML5 elements (header, main, section, nav, article) for major structural components, supporting screen reader navigation.
 
 **Validates: Requirements 10.5**
 
@@ -466,43 +483,43 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 21: Card Shadow Depth**
 
-*For any* card or container element (experience entries, sidebar sections), the element SHALL have a box-shadow property defined, creating visual depth and layering.
+_For any_ card or container element (experience entries, sidebar sections), the element SHALL have a box-shadow property defined, creating visual depth and layering.
 
 **Validates: Requirements 7.1**
 
 **Property 22: Rounded Corner Styling**
 
-*For any* card or container element, the element SHALL have a border-radius property ≥0.5rem (8px), creating modern rounded corners.
+_For any_ card or container element, the element SHALL have a border-radius property ≥0.5rem (8px), creating modern rounded corners.
 
 **Validates: Requirements 7.2**
 
 **Property 23: Section Boundary Definition**
 
-*For any* major section (Summary, Professional Experience, ProudOf, Technologies, Passions), the section SHALL have at least one of the following: background-color different from adjacent sections, border, or margin/padding ≥1rem, creating clear section boundaries.
+_For any_ major section (Summary, Professional Experience, ProudOf, Technologies, Passions), the section SHALL have at least one of the following: background-color different from adjacent sections, border, or margin/padding ≥1rem, creating clear section boundaries.
 
 **Validates: Requirements 8.1, 8.3, 8.5**
 
 **Property 24: Experience Card Styling**
 
-*For any* professional experience entry, the entry SHALL have at least two of the following card-like properties: background-color, border, box-shadow, border-radius, creating a distinct card appearance.
+_For any_ professional experience entry, the entry SHALL have at least two of the following card-like properties: background-color, border, box-shadow, border-radius, creating a distinct card appearance.
 
 **Validates: Requirements 12.1, 12.2**
 
 **Property 25: Experience Card Spacing Consistency**
 
-*For any* two adjacent professional experience entries, the spacing between them SHALL be equal, ensuring consistent visual rhythm.
+_For any_ two adjacent professional experience entries, the spacing between them SHALL be equal, ensuring consistent visual rhythm.
 
 **Validates: Requirements 12.3**
 
 **Property 26: Experience Card Hover Feedback**
 
-*For any* professional experience card, the element SHALL have :hover pseudo-class styles that modify box-shadow, border-color, or transform properties, providing interactive feedback.
+_For any_ professional experience card, the element SHALL have :hover pseudo-class styles that modify box-shadow, border-color, or transform properties, providing interactive feedback.
 
 **Validates: Requirements 12.4**
 
 **Property 27: Experience Card Content Hierarchy**
 
-*For any* professional experience entry, the job title element SHALL have a larger font-size or greater font-weight than the description text, maintaining visual hierarchy within the card.
+_For any_ professional experience entry, the job title element SHALL have a larger font-size or greater font-weight than the description text, maintaining visual hierarchy within the card.
 
 **Validates: Requirements 12.5**
 
@@ -510,25 +527,25 @@ For this design improvement feature, properties focus on verifying that the visu
 
 **Property 28: Icon Size Proportionality**
 
-*For any* icon adjacent to text, the icon height SHALL be between 0.75x and 1.25x the line-height of the adjacent text, ensuring appropriate relative sizing.
+_For any_ icon adjacent to text, the icon height SHALL be between 0.75x and 1.25x the line-height of the adjacent text, ensuring appropriate relative sizing.
 
 **Validates: Requirements 9.1**
 
 **Property 29: Icon Color Scheme Compliance**
 
-*For any* icon element, the color value SHALL be from the defined color palette (primary, secondary, or accent color scales), ensuring design system consistency.
+_For any_ icon element, the color value SHALL be from the defined color palette (primary, secondary, or accent color scales), ensuring design system consistency.
 
 **Validates: Requirements 9.2**
 
 **Property 30: Icon Text Alignment**
 
-*For any* icon adjacent to text, the icon SHALL have vertical-align or flex alignment properties that align it with the text baseline or center, ensuring proper visual alignment.
+_For any_ icon adjacent to text, the icon SHALL have vertical-align or flex alignment properties that align it with the text baseline or center, ensuring proper visual alignment.
 
 **Validates: Requirements 9.3**
 
 **Property 31: Icon Styling Consistency**
 
-*For any* two icons in the application, both icons SHALL have the same height and width values (or use the same size class), ensuring consistent icon sizing throughout.
+_For any_ two icons in the application, both icons SHALL have the same height and width values (or use the same size class), ensuring consistent icon sizing throughout.
 
 **Validates: Requirements 9.5**
 
@@ -577,6 +594,7 @@ Unit tests will focus on:
 **Testing Framework**: Vitest + React Testing Library + jsdom
 
 **Example Unit Tests**:
+
 - Header component renders with correct typography classes
 - Sidebar has gradient background on desktop
 - Experience entries have card styling classes
@@ -589,27 +607,32 @@ Property-based tests will verify universal design properties using automated tes
 **Testing Framework**: fast-check (JavaScript property-based testing library)
 
 **Configuration**:
+
 - Minimum 100 iterations per property test
 - Each test tagged with: **Feature: portfolio-design-improvements, Property {number}: {property_text}**
 
 **Property Test Categories**:
 
 1. **Accessibility Properties** (Properties 1, 2, 18, 19, 20):
+
    - Generate random color combinations and verify contrast ratios
    - Generate random DOM structures and verify heading hierarchy
    - Verify focus states on all interactive elements
 
 2. **Responsive Properties** (Properties 8, 9, 10, 11, 12):
+
    - Test layout behavior across random viewport widths
    - Verify font size and spacing adjustments at different breakpoints
    - Test touch target sizes on mobile viewports
 
 3. **Animation Properties** (Properties 13, 14, 15):
+
    - Verify transition properties on all interactive elements
    - Test animation durations are within bounds
    - Verify reduced motion preferences are respected
 
 4. **Visual Styling Properties** (Properties 3, 4, 5, 6, 7, 21, 22, 23, 24, 25, 26, 27):
+
    - Test spacing consistency across components
    - Verify visual hierarchy in headings and content
    - Test card styling properties on experience entries
@@ -621,6 +644,7 @@ Property-based tests will verify universal design properties using automated tes
    - Test icon alignment with text
 
 **Testing Approach**:
+
 - Use jsdom or Playwright for DOM manipulation and style computation
 - Generate random component props and verify computed styles
 - Test across multiple viewport sizes using viewport emulation
@@ -629,6 +653,7 @@ Property-based tests will verify universal design properties using automated tes
 ### Visual Regression Testing (Optional)
 
 For additional confidence, visual regression testing can be used:
+
 - **Tool**: Percy, Chromatic, or similar
 - **Approach**: Capture screenshots of components at different viewport sizes
 - **Benefit**: Catch unintended visual changes
@@ -636,6 +661,7 @@ For additional confidence, visual regression testing can be used:
 ### Manual Testing Checklist
 
 Before deployment, manually verify:
+
 - [ ] Design looks good on mobile (320px, 375px, 414px widths)
 - [ ] Design looks good on tablet (768px, 1024px widths)
 - [ ] Design looks good on desktop (1280px, 1920px widths)
@@ -649,6 +675,7 @@ Before deployment, manually verify:
 ### Performance Considerations
 
 While not strictly correctness properties, monitor:
+
 - CSS bundle size (should remain reasonable with Tailwind purging)
 - Animation performance (should maintain 60fps)
 - Font loading performance (use font-display: swap)

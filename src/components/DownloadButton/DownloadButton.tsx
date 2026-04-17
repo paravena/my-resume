@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { handlePDFError } from '../../services/PDFErrors';
-import { checkBrowserSupport, getUnsupportedFeaturesMessage, BrowserSupportResult } from '../../services/BrowserFeatureDetection';
+import {
+  checkBrowserSupport,
+  getUnsupportedFeaturesMessage,
+  BrowserSupportResult,
+} from '../../services/BrowserFeatureDetection';
 import { useLocale } from '../../i18n';
 
 /**
  * Props interface for the DownloadButton component.
- * 
+ *
  * @property targetRef - Reference to the HTML element to be captured for PDF generation
  * @property filename - Optional filename for the downloaded PDF (default: 'resume.pdf')
  * @property className - Optional CSS class name for custom styling
@@ -27,16 +31,16 @@ export interface DownloadButtonProps {
 
 /**
  * DownloadButton component that triggers PDF generation and download.
- * 
+ *
  * This component provides a button that, when clicked, opens the browser's
  * native print dialog configured for PDF output. This approach uses the
  * browser's rendering engine which handles all CSS correctly including
  * flexbox, icons, and custom fonts.
- * 
+ *
  * @example
  * ```tsx
  * const resumeRef = useRef<HTMLDivElement>(null);
- * 
+ *
  * <DownloadButton
  *   targetRef={resumeRef}
  *   filename="my-resume.pdf"
@@ -80,7 +84,8 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    * Used to determine if the browser supports all required features for PDF generation.
    * Validates: Requirements 5.4
    */
-  const [browserSupport, setBrowserSupport] = useState<BrowserSupportResult | null>(null);
+  const [browserSupport, setBrowserSupport] =
+    useState<BrowserSupportResult | null>(null);
 
   /**
    * State for tracking if the operation is taking longer than expected (> 2 seconds).
@@ -100,13 +105,17 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    * Ref for the timeout that detects when operation takes > 2 seconds.
    * Validates: Requirements 6.3
    */
-  const longOperationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longOperationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   /**
    * Ref for the interval that updates elapsed time during long operations.
    * Validates: Requirements 6.3
    */
-  const elapsedIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const elapsedIntervalRef = useRef<ReturnType<typeof setInterval> | null>(
+    null,
+  );
 
   /**
    * Ref to track if a PDF generation is currently in progress.
@@ -138,10 +147,10 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       longOperationTimeoutRef.current = setTimeout(() => {
         setIsLongOperation(true);
         setElapsedSeconds(2);
-        
+
         // Start interval to update elapsed time every second
         elapsedIntervalRef.current = setInterval(() => {
-          setElapsedSeconds((prev) => prev + 1);
+          setElapsedSeconds(prev => prev + 1);
         }, 1000);
       }, 2000);
     } else {
@@ -172,16 +181,16 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
 
   /**
    * Handles retry after a PDF generation failure.
-   * 
+   *
    * This function resets the error state and triggers a new download attempt.
    * It implements the error recovery flow as specified in Requirement 7.3.
-   * 
+   *
    * Validates: Requirement 7.3
    */
   const handleRetry = (): void => {
     // Reset error state
     setError(null);
-    
+
     // Call handleDownload to retry the PDF generation
     // Note: handleDownload will set isGenerating to true, so we don't need to reset it here
     handleDownload();
@@ -189,17 +198,17 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
 
   /**
    * Handles the PDF download process using browser's native print functionality.
-   * 
+   *
    * This function uses window.print() which leverages the browser's native
    * rendering engine. This ensures all CSS is rendered correctly including
    * flexbox layouts, SVG icons, and custom fonts.
-   * 
+   *
    * The @media print CSS rules in index.css handle:
    * - Hiding elements marked with data-hide-for-print
    * - Setting proper page margins
    * - Ensuring colors print correctly
    * - Preventing page breaks inside cards
-   * 
+   *
    * Validates: Requirements 1.1, 3.2, 3.3, 3.4, 3.5
    */
   const handleDownload = async (): Promise<void> => {
@@ -227,7 +236,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
 
       // Store original document title to restore later
       const originalTitle = document.title;
-      
+
       // Set document title to filename (browsers use this as default PDF filename)
       document.title = filename.replace('.pdf', '');
 
@@ -248,13 +257,12 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2000);
       onSuccess?.();
-
     } catch (err) {
       // Handle unexpected errors
       // Validates: Requirements 3.4
       const errorMessage = handlePDFError(err);
       setError(errorMessage);
-      
+
       // Call onError callback
       const errorObj = err instanceof Error ? err : new Error(String(err));
       onError?.(errorObj);
@@ -274,7 +282,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    */
   const LoadingSpinner = () => (
     <svg
-      className="animate-spin -ml-1 mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white"
+      className="-ml-1 mr-1.5 h-4 w-4 animate-spin text-white sm:mr-2 sm:h-5 sm:w-5"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -303,7 +311,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    */
   const DownloadIcon = () => (
     <svg
-      className="-ml-1 mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5"
+      className="-ml-1 mr-1.5 h-4 w-4 sm:mr-2 sm:h-5 sm:w-5"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -327,7 +335,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    */
   const SuccessIcon = () => (
     <svg
-      className="-ml-1 mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white animate-[scale-in_0.2s_ease-out]"
+      className="-ml-1 mr-1.5 h-4 w-4 animate-[scale-in_0.2s_ease-out] text-white sm:mr-2 sm:h-5 sm:w-5"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -335,11 +343,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       strokeWidth={2.5}
       aria-hidden="true"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M5 13l4 4L19 7"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   );
 
@@ -350,21 +354,21 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    * Validates: Requirements 6.3
    */
   const LongOperationProgress = () => (
-    <div 
+    <div
       className="mt-3 flex flex-col items-start"
       role="status"
       aria-live="polite"
       data-testid="long-operation-progress"
     >
-      <div className="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg max-w-md">
+      <div className="flex max-w-md items-center rounded-lg border border-blue-200 bg-blue-50 p-3">
         {/* Animated progress indicator */}
-        <div className="flex items-center mr-3">
+        <div className="mr-3 flex items-center">
           <div className="relative">
             {/* Outer pulsing ring */}
-            <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-25" />
+            <div className="absolute inset-0 animate-ping rounded-full bg-blue-400 opacity-25" />
             {/* Inner spinning circle */}
             <svg
-              className="relative h-6 w-6 text-blue-600 animate-spin"
+              className="relative h-6 w-6 animate-spin text-blue-600"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -390,8 +394,11 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
           <p className="text-sm font-medium text-blue-800">
             {t('downloadButton.longOperation.title')}
           </p>
-          <p className="text-xs text-blue-600 mt-0.5">
-            {t('downloadButton.longOperation.elapsed').replace('{seconds}', String(elapsedSeconds))}
+          <p className="mt-0.5 text-xs text-blue-600">
+            {t('downloadButton.longOperation.elapsed').replace(
+              '{seconds}',
+              String(elapsedSeconds),
+            )}
           </p>
         </div>
       </div>
@@ -405,7 +412,10 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    */
   const getStatusMessage = (): string => {
     if (browserSupport && !browserSupport.isFullySupported) {
-      return getUnsupportedFeaturesMessage(browserSupport) || 'Browser features not supported';
+      return (
+        getUnsupportedFeaturesMessage(browserSupport) ||
+        'Browser features not supported'
+      );
     }
     if (isGenerating && isLongOperation) {
       return `${t('downloadButton.generating')} ${t('downloadButton.longOperation.elapsed').replace('{seconds}', String(elapsedSeconds))}`;
@@ -427,16 +437,19 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
    * Button is disabled when generating PDF or when browser features are not supported.
    * Validates: Requirements 3.3, 5.4
    */
-  const isButtonDisabled = isGenerating || (browserSupport !== null && !browserSupport.isFullySupported);
+  const isButtonDisabled =
+    isGenerating ||
+    (browserSupport !== null && !browserSupport.isFullySupported);
 
   /**
    * Gets the warning message for unsupported browser features.
    * Returns null if all features are supported.
    * Validates: Requirements 5.4
    */
-  const browserWarningMessage = browserSupport && !browserSupport.isFullySupported
-    ? getUnsupportedFeaturesMessage(browserSupport)
-    : null;
+  const browserWarningMessage =
+    browserSupport && !browserSupport.isFullySupported
+      ? getUnsupportedFeaturesMessage(browserSupport)
+      : null;
 
   return (
     <div className="flex flex-col items-start">
@@ -454,26 +467,24 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       {/* Main download button with Tailwind styling */}
       {/* Validates: Requirements 3.2, 3.3, 8.2, 8.3 */}
       {/* Main download button with WCAG AA compliant colors
-          * Background: primary-700 (#0369a1) with white text provides 5.93:1 contrast ratio
-          * This exceeds the WCAG 2.1 AA requirement of 4.5:1 for normal text
-          * Responsive sizing: smaller padding on mobile, larger on desktop
-          * Validates: Requirement 8.4, 3.1 */}
+       * Background: primary-700 (#0369a1) with white text provides 5.93:1 contrast ratio
+       * This exceeds the WCAG 2.1 AA requirement of 4.5:1 for normal text
+       * Responsive sizing: smaller padding on mobile, larger on desktop
+       * Validates: Requirement 8.4, 3.1 */}
       <button
         type="button"
-        className={`
-          inline-flex items-center justify-center
-          px-3 py-2 sm:px-4 sm:py-2.5
-          text-xs sm:text-sm font-medium text-white
-          ${showSuccess ? 'bg-green-600 hover:bg-green-700' : 'bg-primary-700 hover:bg-primary-800'}
-          border border-transparent rounded-lg
-          shadow-md
-          transition-all duration-200 ease-in-out
-          hover:shadow-lg
-          focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
-          disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md
-          ${className || ''}
-        `.trim().replace(/\s+/g, ' ')}
-        aria-label={isGenerating ? t('downloadButton.generating') : showSuccess ? t('downloadButton.downloaded') : browserWarningMessage ? 'Download PDF - feature not supported' : t('downloadButton.download')}
+        className={`inline-flex items-center justify-center px-3 py-2 text-xs font-medium text-white sm:px-4 sm:py-2.5 sm:text-sm ${showSuccess ? 'bg-green-600 hover:bg-green-700' : 'bg-primary-700 hover:bg-primary-800'} rounded-lg border border-transparent shadow-md transition-all duration-200 ease-in-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-md ${className || ''} `
+          .trim()
+          .replace(/\s+/g, ' ')}
+        aria-label={
+          isGenerating
+            ? t('downloadButton.generating')
+            : showSuccess
+              ? t('downloadButton.downloaded')
+              : browserWarningMessage
+                ? 'Download PDF - feature not supported'
+                : t('downloadButton.download')
+        }
         aria-busy={isGenerating}
         aria-disabled={isButtonDisabled}
         onClick={handleDownload}
@@ -501,14 +512,14 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       {/* Validates: Requirements 5.4 */}
       {browserWarningMessage && (
         <div className="mt-3 flex flex-col items-start">
-          <div 
-            className="flex items-start p-3 bg-amber-50 border border-amber-200 rounded-lg max-w-md"
+          <div
+            className="flex max-w-md items-start rounded-lg border border-amber-200 bg-amber-50 p-3"
             role="alert"
             aria-live="polite"
           >
             {/* Warning icon */}
             <svg
-              className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5"
+              className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-amber-500"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -537,14 +548,14 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
       {error && (
         <div className="mt-3 flex flex-col items-start">
           {/* Error message with alert styling */}
-          <div 
-            className="flex items-start p-3 bg-red-50 border border-red-200 rounded-lg"
+          <div
+            className="flex items-start rounded-lg border border-red-200 bg-red-50 p-3"
             role="alert"
             aria-live="polite"
           >
             {/* Error icon */}
             <svg
-              className="h-5 w-5 text-red-500 mr-2 flex-shrink-0 mt-0.5"
+              className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-red-500"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -567,22 +578,13 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({
             onClick={handleRetry}
             disabled={isGenerating}
             aria-label="Retry PDF download"
-            className={`
-              mt-2
-              inline-flex items-center justify-center
-              px-3 py-1.5
-              text-sm font-medium text-primary-700
-              bg-primary-50
-              border border-primary-200 rounded-md
-              transition-all duration-200 ease-in-out
-              hover:bg-primary-100 hover:border-primary-300
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
-              disabled:opacity-50 disabled:cursor-not-allowed
-            `.trim().replace(/\s+/g, ' ')}
+            className={`mt-2 inline-flex items-center justify-center rounded-md border border-primary-200 bg-primary-50 px-3 py-1.5 text-sm font-medium text-primary-700 transition-all duration-200 ease-in-out hover:border-primary-300 hover:bg-primary-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50`
+              .trim()
+              .replace(/\s+/g, ' ')}
           >
             {/* Retry icon */}
             <svg
-              className="h-4 w-4 mr-1.5"
+              className="mr-1.5 h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

@@ -1,10 +1,6 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import {
-  DEFAULT_LOCALE,
-  LOCALE_STORAGE_KEY,
-  SUPPORTED_LOCALES,
-} from './types';
+import { DEFAULT_LOCALE, LOCALE_STORAGE_KEY, SUPPORTED_LOCALES } from './types';
 import type { SupportedLocale, TranslationMap } from './types';
 
 export interface LocaleContextValue {
@@ -31,7 +27,9 @@ function getInitialLocale(): SupportedLocale {
 async function fetchTranslations(
   locale: SupportedLocale,
 ): Promise<TranslationMap> {
-  const response = await fetch(`${import.meta.env.BASE_URL}locales/${locale}.json`);
+  const response = await fetch(
+    `${import.meta.env.BASE_URL}locales/${locale}.json`,
+  );
   if (!response.ok) {
     throw new Error(`Failed to fetch locale file: ${response.status}`);
   }

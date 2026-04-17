@@ -6,7 +6,7 @@
   "header.location": "Santiago, Chile",
 
   "summary.title": "Resumen",
-  "summary.text": "Tengo una amplia experiencia como desarrollador de software durante más de 15 años. Mi especialización abarca diversas tecnologías y lenguajes de programación, particularmente JavaScript y Java. Una de mis áreas clave de enfoque en mi trabajo diario son las pruebas unitarias y las pruebas funcionales, ya que me ayudan a comprender los requisitos del usuario antes de comenzar cualquier tarea de codificación. En esencia, soy un desarrollador de software que prioriza la comprensión de las necesidades del usuario y luego se esfuerza por implementar las mejores soluciones para cumplir con esas expectativas.",
+  "summary.text": "Desarrollador Full Stack con más de 20 años de experiencia construyendo aplicaciones web y móviles en industrias como búsqueda de empleo, logística, retail y fintech. Actualmente en Indeed, entregando funcionalidades con micro frontends, APIs GraphQL y herramientas de desarrollo impulsadas por IA. Ingeniero políglota competente en React, TypeScript, Java, Node.js, Python y Elixir, con un enfoque guiado por pruebas para entregar software confiable.",
 
   "professionalExperience.title": "Experiencia Profesional",
   "professionalExperience.dateFrom": "Desde",
@@ -24,6 +24,7 @@
   "professionalExperience.indeed.activities.3": "Definir tipos de modelos en Contentful",
   "professionalExperience.indeed.activities.4": "Crear y optimizar APIs GraphQL para la obtención de datos",
   "professionalExperience.indeed.activities.5": "Implementar procesos batch para tareas de procesamiento de datos",
+  "professionalExperience.indeed.activities.6": "Utilizar herramientas de desarrollo impulsadas por IA (LLMs, Claude Code, Windsurf, Junie, Kiro IDE) para acelerar la entrega de funcionalidades y mejorar la calidad del código",
 
   "professionalExperience.toptal.title": "Desarrollador Full Stack",
   "professionalExperience.toptal.company": "Toptal.com",
@@ -119,20 +120,20 @@
   "technologies.programmingLanguages.title": "Lenguajes de Programación",
   "technologies.frameworks.title": "Frameworks y Bibliotecas",
   "technologies.databases.title": "Bases de Datos",
+  "technologies.platforms.title": "Plataformas",
   "technologies.clouds.title": "Entornos en la Nube",
+  "technologies.aiTools.title": "Herramientas de IA",
   "technologies.certifications.title": "Certificaciones",
 
   "passions.title": "Pasiones",
   "passions.programming.title": "Programación",
   "passions.programming.description": "No es solo un trabajo para mí, realmente disfruto programar y aprender cosas nuevas tanto como sea posible.",
   "passions.saxophone.title": "Saxofón",
-  "passions.saxophone.description": "Todavía es difícil para mí, pero desde que comencé a aprender música hace seis años y descubrí este maravilloso instrumento, encontré un nuevo mundo que realmente disfruto :-).",
+  "passions.saxophone.description": "Desde que comencé a aprender música en 2018 y descubrí este maravilloso instrumento, encontré un nuevo mundo que realmente disfruto.",
 
-  "proudOf.title": "Mayor Orgullo",
-  "proudOf.degree.text": "Graduado como Ingeniero en Computación de",
-  "proudOf.degree.detail": "Universidad de Santiago de Chile, 2001",
-  "proudOf.openSource.text": "He creado mi propio proyecto de código abierto publicado en",
-  "proudOf.openSource.url": "http://github.com/paravena/myui2",
+  "education.title": "Educación",
+  "education.degree.text": "Ingeniero en Computación,",
+  "education.degree.detail": "Universidad de Santiago de Chile, 2001",
 
   "downloadButton.download": "Descargar PDF",
   "downloadButton.generating": "Generando PDF...",

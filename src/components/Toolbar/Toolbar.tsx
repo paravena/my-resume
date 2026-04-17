@@ -11,7 +11,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ targetRef, pdfFilename }) => {
   return (
     <div
       data-hide-for-print
-      className="fixed top-0 left-0 right-0 z-50 bg-blue-50 px-4 py-2 flex items-center justify-end gap-4"
+      className="fixed left-0 right-0 top-0 z-50 flex items-center justify-end gap-4 bg-blue-50 px-4 py-2"
     >
       <LanguageSelector />
       <DownloadButton targetRef={targetRef} filename={pdfFilename} />

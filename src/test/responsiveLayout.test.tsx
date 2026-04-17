@@ -18,17 +18,17 @@ const renderWithLocale = (ui: React.ReactElement) =>
   render(
     <LocaleContext.Provider value={mockLocaleContext}>
       {ui}
-    </LocaleContext.Provider>
+    </LocaleContext.Provider>,
   );
 
 /**
  * **Feature: portfolio-design-improvements**
- * 
+ *
  * Property 8: Mobile Layout Stacking
  * **Validates: Requirements 5.1**
  * For any viewport width <768px, the main layout container SHALL use
  * flex-direction: column (or equivalent single-column layout), stacking content vertically.
- * 
+ *
  * Property 12: Desktop Two-Column Layout
  * **Validates: Requirements 3.4**
  * For any viewport width ≥768px, the main content area SHALL display as a two-column
@@ -43,16 +43,19 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
   beforeEach(() => {
     // Create a new JSDOM instance
-    dom = new JSDOM('<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>', {
-      url: 'http://localhost',
-      pretendToBeVisual: true,
-    });
+    dom = new JSDOM(
+      '<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>',
+      {
+        url: 'http://localhost',
+        pretendToBeVisual: true,
+      },
+    );
     document = dom.window.document;
-    window = dom.window as any;
-    
+    window = dom.window as unknown as Window & typeof globalThis;
+
     // Set up global window and document for React
     global.document = document;
-    global.window = window as any;
+    global.window = window as unknown as Window & typeof globalThis;
   });
 
   afterEach(() => {
@@ -75,7 +78,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
    */
   function getFlexDirection(element: HTMLElement): string {
     const classList = element.className;
-    
+
     // Check for flex-col (mobile-first)
     if (classList.includes('flex-col')) {
       // Check if there's a md:flex-row override
@@ -85,17 +88,17 @@ describe('Responsive Layout - Property-Based Tests', () => {
       }
       return 'column';
     }
-    
+
     // Check for flex-row
     if (classList.includes('flex-row')) {
       return 'row';
     }
-    
+
     // Default flex direction is row
     if (classList.includes('flex')) {
       return 'row';
     }
-    
+
     return 'block';
   }
 
@@ -111,9 +114,11 @@ describe('Responsive Layout - Property-Based Tests', () => {
   /**
    * Helper function to get column width classes
    */
-  function getColumnWidthRatio(element: HTMLElement): { main: number; sidebar: number } | null {
+  function getColumnWidthRatio(
+    element: HTMLElement,
+  ): { main: number; sidebar: number } | null {
     const children = Array.from(element.children) as HTMLElement[];
-    
+
     if (children.length < 2) {
       return null;
     }
@@ -124,9 +129,9 @@ describe('Responsive Layout - Property-Based Tests', () => {
     // Check main column classes
     const mainClasses = mainColumn.className;
     let mainWidth = 0;
-    
+
     if (mainClasses.includes('md:w-2/3')) {
-      mainWidth = 2/3;
+      mainWidth = 2 / 3;
     } else if (mainClasses.includes('flex-1')) {
       mainWidth = 0.65; // Approximate flex-1 with sidebar constraint
     }
@@ -134,9 +139,9 @@ describe('Responsive Layout - Property-Based Tests', () => {
     // Check sidebar classes
     const sidebarClasses = sidebarColumn.className;
     let sidebarWidth = 0;
-    
+
     if (sidebarClasses.includes('md:w-1/3')) {
-      sidebarWidth = 1/3;
+      sidebarWidth = 1 / 3;
     }
 
     if (mainWidth > 0 && sidebarWidth > 0) {
@@ -153,7 +158,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
         fc.property(
           // Generate random mobile viewport widths (320px to 767px)
           fc.integer({ min: 320, max: 767 }),
-          (viewportWidth) => {
+          viewportWidth => {
             // Set viewport width
             setViewportWidth(viewportWidth);
 
@@ -162,18 +167,20 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
             // Find the main layout section (the one with flex-col md:flex-row)
             const layoutSection = container.querySelector('main > section');
-            
+
             expect(layoutSection).toBeTruthy();
-            
+
             if (layoutSection) {
-              const flexDirection = getFlexDirection(layoutSection as HTMLElement);
-              
+              const flexDirection = getFlexDirection(
+                layoutSection as HTMLElement,
+              );
+
               // On mobile (<768px), flex direction should be column
               expect(flexDirection).toBe('column');
             }
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -181,15 +188,15 @@ describe('Responsive Layout - Property-Based Tests', () => {
       // This is a unit test to verify the classes are present
       const { container } = renderWithLocale(<App />);
       const layoutSection = container.querySelector('main > section');
-      
+
       expect(layoutSection).toBeTruthy();
-      
+
       if (layoutSection) {
         const classList = layoutSection.className;
-        
+
         // Should have flex-col for mobile
         expect(classList).toContain('flex-col');
-        
+
         // Should have md:flex-row for desktop
         expect(classList).toContain('md:flex-row');
       }
@@ -203,7 +210,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
         fc.property(
           // Generate random desktop viewport widths (768px to 2560px)
           fc.integer({ min: 768, max: 2560 }),
-          (viewportWidth) => {
+          viewportWidth => {
             // Set viewport width
             setViewportWidth(viewportWidth);
 
@@ -212,21 +219,25 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
             // Find the main layout section
             const layoutSection = container.querySelector('main > section');
-            
+
             expect(layoutSection).toBeTruthy();
-            
+
             if (layoutSection) {
-              const flexDirection = getFlexDirection(layoutSection as HTMLElement);
-              
+              const flexDirection = getFlexDirection(
+                layoutSection as HTMLElement,
+              );
+
               // On desktop (≥768px), flex direction should be row
               expect(flexDirection).toBe('row');
-              
+
               // Should have two-column layout
-              expect(hasTwoColumnLayout(layoutSection as HTMLElement)).toBe(true);
+              expect(hasTwoColumnLayout(layoutSection as HTMLElement)).toBe(
+                true,
+              );
             }
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -235,7 +246,7 @@ describe('Responsive Layout - Property-Based Tests', () => {
         fc.property(
           // Generate random desktop viewport widths
           fc.integer({ min: 768, max: 2560 }),
-          (viewportWidth) => {
+          viewportWidth => {
             // Set viewport width
             setViewportWidth(viewportWidth);
 
@@ -244,27 +255,29 @@ describe('Responsive Layout - Property-Based Tests', () => {
 
             // Find the main layout section
             const layoutSection = container.querySelector('main > section');
-            
+
             expect(layoutSection).toBeTruthy();
-            
+
             if (layoutSection) {
-              const widthRatio = getColumnWidthRatio(layoutSection as HTMLElement);
-              
+              const widthRatio = getColumnWidthRatio(
+                layoutSection as HTMLElement,
+              );
+
               expect(widthRatio).toBeTruthy();
-              
+
               if (widthRatio) {
                 // Main column should be approximately 60-65% (2/3 ≈ 0.667)
-                expect(widthRatio.main).toBeGreaterThanOrEqual(0.60);
-                expect(widthRatio.main).toBeLessThanOrEqual(0.70);
-                
+                expect(widthRatio.main).toBeGreaterThanOrEqual(0.6);
+                expect(widthRatio.main).toBeLessThanOrEqual(0.7);
+
                 // Sidebar should be approximately 35-40% (1/3 ≈ 0.333)
-                expect(widthRatio.sidebar).toBeGreaterThanOrEqual(0.30);
-                expect(widthRatio.sidebar).toBeLessThanOrEqual(0.40);
+                expect(widthRatio.sidebar).toBeGreaterThanOrEqual(0.3);
+                expect(widthRatio.sidebar).toBeLessThanOrEqual(0.4);
               }
             }
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -272,18 +285,18 @@ describe('Responsive Layout - Property-Based Tests', () => {
       // This is a unit test to verify the classes are present
       const { container } = renderWithLocale(<App />);
       const layoutSection = container.querySelector('main > section');
-      
+
       expect(layoutSection).toBeTruthy();
-      
+
       if (layoutSection) {
         const children = Array.from(layoutSection.children) as HTMLElement[];
-        
+
         expect(children.length).toBeGreaterThanOrEqual(2);
-        
+
         // Main content column (first child)
         const mainColumn = children[0];
         expect(mainColumn.className).toMatch(/md:w-2\/3|flex-1/);
-        
+
         // Sidebar column (second child)
         const sidebarColumn = children[1];
         expect(sidebarColumn.className).toContain('md:w-1/3');
@@ -300,33 +313,39 @@ describe('Responsive Layout - Property-Based Tests', () => {
           // Generate pairs of viewport widths (mobile and desktop)
           fc.tuple(
             fc.integer({ min: 320, max: 767 }),
-            fc.integer({ min: 768, max: 2560 })
+            fc.integer({ min: 768, max: 2560 }),
           ),
           ([mobileWidth, desktopWidth]) => {
             // Test mobile layout
             setViewportWidth(mobileWidth);
             const { container: mobileContainer } = renderWithLocale(<App />);
-            const mobileSection = mobileContainer.querySelector('main > section');
-            
+            const mobileSection =
+              mobileContainer.querySelector('main > section');
+
             expect(mobileSection).toBeTruthy();
             if (mobileSection) {
-              const mobileFlexDirection = getFlexDirection(mobileSection as HTMLElement);
+              const mobileFlexDirection = getFlexDirection(
+                mobileSection as HTMLElement,
+              );
               expect(mobileFlexDirection).toBe('column');
             }
 
             // Test desktop layout
             setViewportWidth(desktopWidth);
             const { container: desktopContainer } = renderWithLocale(<App />);
-            const desktopSection = desktopContainer.querySelector('main > section');
-            
+            const desktopSection =
+              desktopContainer.querySelector('main > section');
+
             expect(desktopSection).toBeTruthy();
             if (desktopSection) {
-              const desktopFlexDirection = getFlexDirection(desktopSection as HTMLElement);
+              const desktopFlexDirection = getFlexDirection(
+                desktopSection as HTMLElement,
+              );
               expect(desktopFlexDirection).toBe('row');
             }
-          }
+          },
         ),
-        { numRuns: 10 }
+        { numRuns: 10 },
       );
     });
   });

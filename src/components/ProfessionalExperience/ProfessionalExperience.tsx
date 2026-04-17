@@ -24,6 +24,7 @@ const ProfessionalExperience = () => {
             <li>{t('professionalExperience.indeed.activities.3')}</li>
             <li>{t('professionalExperience.indeed.activities.4')}</li>
             <li>{t('professionalExperience.indeed.activities.5')}</li>
+            <li>{t('professionalExperience.indeed.activities.6')}</li>
           </ul>
         </ProfessionalExperienceEntry>
         <ProfessionalExperienceEntry

@@ -6,7 +6,7 @@
   "header.location": "Santiago, Chile",
 
   "summary.title": "Summary",
-  "summary.text": "I have extensive experience as a software developer for over 15 years. My expertise lies in various technologies and programming languages, particularly JavaScript and Java. One of my key areas of focus in my daily work is unit testing and functional testing, as they aid me in understanding user requirements before beginning any coding tasks. In essence, I am a software developer who prioritizes understanding user needs and then strives to implement the best solutions to meet those expectations.",
+  "summary.text": "Full Stack Developer with over 20 years of experience building web and mobile applications across industries including job search, logistics, retail, and fintech. Currently at Indeed, delivering features with micro frontends, GraphQL APIs, and AI-powered development tools. Polyglot engineer proficient in React, TypeScript, Java, Node.js, Python, and Elixir, with a test-driven approach to delivering reliable software.",
 
   "professionalExperience.title": "Professional Experience",
   "professionalExperience.dateFrom": "From",
@@ -24,6 +24,7 @@
   "professionalExperience.indeed.activities.3": "Create Self Service Contentful web app",
   "professionalExperience.indeed.activities.4": "Create and optimize GraphQL APIs for data fetching",
   "professionalExperience.indeed.activities.5": "Implement batch processes for data processing tasks",
+  "professionalExperience.indeed.activities.6": "Leverage AI-powered development tools (LLMs, Claude Code, Windsurf, Junie, Kiro IDE) to accelerate feature delivery and improve code quality",
 
   "professionalExperience.toptal.title": "Full Stack Developer",
   "professionalExperience.toptal.company": "Toptal.com",
@@ -119,20 +120,20 @@
   "technologies.programmingLanguages.title": "Programming Languages",
   "technologies.frameworks.title": "Frameworks and Libraries",
   "technologies.databases.title": "Databases",
-  "technologies.clouds.title": "Clouds Environments",
+  "technologies.platforms.title": "Platforms",
+  "technologies.clouds.title": "Cloud Environments",
+  "technologies.aiTools.title": "AI Tools",
   "technologies.certifications.title": "Certifications",
 
   "passions.title": "Passions",
   "passions.programming.title": "Programming",
   "passions.programming.description": "It is not only a job for me, I really enjoy programming and learn new things as much as possible.",
   "passions.saxophone.title": "Saxophone",
-  "passions.saxophone.description": "It is still hard for me, but since I started learning music six years ago and discovered this wonderful instrument, I found a new world for me which I really enjoy :-).",
+  "passions.saxophone.description": "Since I started learning music in 2018 and discovered this wonderful instrument, I found a new world that I truly enjoy.",
 
-  "proudOf.title": "Most Proud Of",
-  "proudOf.degree.text": "Graduated as Computer Engineer from",
-  "proudOf.degree.detail": "Universidad de Santiago de Chile, 2001",
-  "proudOf.openSource.text": "I have created my own open source project published at",
-  "proudOf.openSource.url": "http://github.com/paravena/myui2",
+  "education.title": "Education",
+  "education.degree.text": "Computer Engineer,",
+  "education.degree.detail": "Universidad de Santiago de Chile, 2001",
 
   "downloadButton.download": "Download PDF",
   "downloadButton.generating": "Generating PDF...",

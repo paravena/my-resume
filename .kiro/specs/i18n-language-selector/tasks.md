@@ -7,11 +7,14 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
 ## Tasks
 
 - [x] 1. Create i18n type definitions and constants
+
   - Create `src/i18n/types.ts` with `SupportedLocale`, `TranslationMap`, `SUPPORTED_LOCALES`, `LOCALE_STORAGE_KEY`, and `DEFAULT_LOCALE`
   - _Requirements: 2.1, 2.3, 7.1_
 
 - [x] 2. Implement LocaleProvider context and useLocale hook
+
   - [x] 2.1 Create `src/i18n/LocaleContext.tsx` with `LocaleProvider` component
+
     - Implement `LocaleContextValue` interface (`locale`, `setLocale`, `t`, `isLoading`)
     - Read persisted locale from `localStorage` on init, default to `en` if missing or invalid
     - Fetch locale JSON from `public/locales/{locale}.json` on init and on locale change
@@ -22,6 +25,7 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 7.1, 7.2, 7.3, 8.1, 8.2, 8.3, 8.4_
 
   - [x] 2.2 Create `src/i18n/useLocale.ts` hook
+
     - Call `useContext(LocaleContext)` and throw if used outside `LocaleProvider`
     - _Requirements: 2.1_
 
@@ -29,6 +33,7 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 2.1_
 
 - [x] 3. Create English locale file with all translatable text
+
   - [x] 3.1 Create `public/locales/en.json` with dot-notation keys grouped by component
     - Extract all hardcoded text from Header (name, phone, email, linkedin, location)
     - Extract all hardcoded text from Summary (title, paragraph)
@@ -41,6 +46,7 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 1.1, 1.3, 1.4_
 
 - [x] 4. Create Spanish locale file
+
   - [x] 4.1 Create `public/locales/es.json` with the same key set as `en.json`
     - Translate all section titles and descriptive text to Spanish
     - Use formal Spanish ("usted" form) for professional tone
@@ -48,52 +54,64 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 1.2, 1.5, 6.1, 6.2, 6.3, 6.4_
 
 - [x] 5. Checkpoint - Verify locale files and context
+
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ]* 6. Write property tests for locale files and translation function
-  - [ ]* 6.1 Write property test for locale key structure
+- [ ]\* 6. Write property tests for locale files and translation function
+
+  - [ ]\* 6.1 Write property test for locale key structure
+
     - **Property 1: Locale key structure**
     - Verify all keys in each locale file match the dot-notation pattern `{componentName}.{path}` where componentName is one of: `header`, `summary`, `professionalExperience`, `technologies`, `passions`, `proudOf`, `downloadButton`, `toolbar`
     - **Validates: Requirements 1.3**
 
-  - [ ]* 6.2 Write property test for locale key set equality
+  - [ ]\* 6.2 Write property test for locale key set equality
+
     - **Property 2: Locale key set equality**
     - Load both `en.json` and `es.json`, verify they contain exactly the same set of keys
     - **Validates: Requirements 1.5**
 
-  - [ ]* 6.3 Write property test for translation function correctness
+  - [ ]\* 6.3 Write property test for translation function correctness
+
     - **Property 3: Translation function correctness**
     - Generate random translation maps and random keys (present and absent), verify `t()` returns the correct value or the key itself as fallback
     - **Validates: Requirements 2.2, 2.5**
 
-  - [ ]* 6.4 Write property test for locale persistence round-trip
+  - [ ]\* 6.4 Write property test for locale persistence round-trip
     - **Property 4: Locale persistence round-trip**
     - Generate random supported locale values, write to mock `localStorage`, read back, verify equality
     - **Validates: Requirements 7.1, 7.2**
 
 - [x] 7. Extract text from components using translation function
+
   - [x] 7.1 Update Header component to use `t()` for all text
+
     - Import `useLocale` hook, replace hardcoded name, phone, email, linkedin URL, and location with `t()` calls
     - _Requirements: 5.1_
 
   - [x] 7.2 Update Summary component to use `t()` for all text
+
     - Replace hardcoded title and paragraph text with `t()` calls
     - _Requirements: 5.2_
 
   - [x] 7.3 Update ProfessionalExperience component to use `t()` for all text
+
     - Replace section title, all job entry titles, company names, dates, locations, descriptions, and activity items with `t()` calls
     - Update `ProfessionalExperienceEntry` to accept translated strings (it already receives props, so callers pass translated values)
     - _Requirements: 5.3_
 
   - [x] 7.4 Update Technologies component to use `t()` for all text
+
     - Replace section title and all category titles with `t()` calls
     - _Requirements: 5.4_
 
   - [x] 7.5 Update Passions component to use `t()` for all text
+
     - Replace section title, passion names, and descriptions with `t()` calls
     - _Requirements: 5.5_
 
   - [x] 7.6 Update ProudOf component to use `t()` for all text
+
     - Replace section title, achievement text, detail text, open source text, and URL with `t()` calls
     - _Requirements: 5.6_
 
@@ -102,10 +120,13 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 5.7_
 
 - [x] 8. Checkpoint - Verify component text extraction
+
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 9. Create Toolbar and LanguageSelector components
+
   - [x] 9.1 Create `src/components/Toolbar/Toolbar.tsx`
+
     - Render as a fixed bar at the top of the page with `bg-blue-50` background
     - Add `data-hide-for-print` attribute to hide during PDF generation
     - Set high `z-index` to stay above scrolling content
@@ -114,6 +135,7 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6_
 
   - [x] 9.2 Create `src/components/LanguageSelector/LanguageSelector.tsx`
+
     - Render EN and ES buttons using `useLocale` hook
     - Visually indicate the active locale (e.g., bold/filled background on active button)
     - Call `setLocale()` on click
@@ -125,7 +147,9 @@ Implement internationalization (i18n) for the portfolio/resume website using a l
     - _Requirements: 3.3, 4.1_
 
 - [x] 10. Wire everything together in App.tsx
+
   - [x] 10.1 Wrap the app with `LocaleProvider` in `App.tsx`
+
     - Import and wrap the root content with `<LocaleProvider>`
     - _Requirements: 2.1, 2.4_
 

@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
+import {
+  render,
+  screen,
+  act,
+  waitFor,
+  fireEvent,
+} from '@testing-library/react';
 import { useContext } from 'react';
 import { LocaleContext, LocaleProvider } from '../i18n/LocaleContext';
 import { LOCALE_STORAGE_KEY } from '../i18n/types';
@@ -198,7 +204,7 @@ describe('LocaleProvider', () => {
     // Make ES fetch hang
     fetchSpy.mockImplementation((url: string) => {
       if (url.includes('/es.json')) {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           resolveEs = resolve;
         });
       }

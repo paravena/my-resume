@@ -9,7 +9,7 @@ const experiences: Experience[] = [
     toDate: 'present',
     summary:
       'Working as a Full Stack Developer on the <a href="https://indeed.com/career-advice">Career Guide</a> website. ' +
-      'Building features using micro frontends with Mosaic (Indeed\'s in-house technology), server-side components, batch processes, and GraphQL APIs.',
+      "Building features using micro frontends with Mosaic (Indeed's in-house technology), server-side components, batch processes, and GraphQL APIs.",
     activities: [
       'Build and maintain micro frontend components using React and TypeScript',
       'Develop server-side features with Node.js and Java',

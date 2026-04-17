@@ -5,6 +5,7 @@
 This design adds internationalization (i18n) to the portfolio/resume website, enabling English and Spanish language support. The approach is lightweight and custom-built using React Context — no heavy i18n libraries are needed given the small scope (2 locales, ~7 components).
 
 The system consists of four main parts:
+
 1. JSON locale files in `public/locales/` loaded at runtime via `fetch`
 2. A `LocaleProvider` React Context that manages the active locale, loads translations, and exposes a `t()` function
 3. A `Toolbar` container fixed at the top of the page grouping the `LanguageSelector` and existing `DownloadButton`
@@ -132,7 +133,6 @@ interface ToolbarProps {
 - Keyboard accessible: focusable buttons with `aria-label` and `aria-pressed`
 - Calls `setLocale()` from context on click
 
-
 ## Data Models
 
 ### Locale File Structure
@@ -211,47 +211,46 @@ export const DEFAULT_LOCALE: SupportedLocale = 'en';
 
 ### localStorage Schema
 
-| Key | Value | Description |
-|-----|-------|-------------|
+| Key                | Value            | Description                             |
+| ------------------ | ---------------- | --------------------------------------- |
 | `preferred-locale` | `"en"` or `"es"` | The user's selected language preference |
-
 
 ## Correctness Properties
 
-*A property is a characteristic or behavior that should hold true across all valid executions of a system — essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
+_A property is a characteristic or behavior that should hold true across all valid executions of a system — essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees._
 
 ### Property 1: Locale key structure
 
-*For any* key in any locale file, the key should match the dot-notation pattern `{componentName}.{path}` where `componentName` is one of the known component prefixes (`header`, `summary`, `professionalExperience`, `technologies`, `passions`, `proudOf`, `downloadButton`, `toolbar`).
+_For any_ key in any locale file, the key should match the dot-notation pattern `{componentName}.{path}` where `componentName` is one of the known component prefixes (`header`, `summary`, `professionalExperience`, `technologies`, `passions`, `proudOf`, `downloadButton`, `toolbar`).
 
 **Validates: Requirements 1.3**
 
 ### Property 2: Locale key set equality
 
-*For any* two locale files in the system, they should contain exactly the same set of keys. That is, the set of keys in `en.json` should be identical to the set of keys in `es.json`.
+_For any_ two locale files in the system, they should contain exactly the same set of keys. That is, the set of keys in `en.json` should be identical to the set of keys in `es.json`.
 
 **Validates: Requirements 1.5**
 
 ### Property 3: Translation function correctness
 
-*For any* translation map and any string key, if the key exists in the map then `t(key)` should return the corresponding value from the map; if the key does not exist in the map then `t(key)` should return the key itself unchanged.
+_For any_ translation map and any string key, if the key exists in the map then `t(key)` should return the corresponding value from the map; if the key does not exist in the map then `t(key)` should return the key itself unchanged.
 
 **Validates: Requirements 2.2, 2.5**
 
 ### Property 4: Locale persistence round-trip
 
-*For any* supported locale value, persisting it to localStorage and then reading it back during initialization should yield the same locale value.
+_For any_ supported locale value, persisting it to localStorage and then reading it back during initialization should yield the same locale value.
 
 **Validates: Requirements 7.1, 7.2**
 
 ## Error Handling
 
-| Scenario | Behavior |
-|----------|----------|
-| Missing translation key | `t(key)` returns the key string itself (Req 2.5) |
-| Locale file fetch fails | Fall back to English locale file; log error to `console.error` (Req 8.4) |
-| Invalid locale in localStorage | Ignore the stored value and default to `en` |
-| Locale file returns non-JSON | Treat as fetch failure — fall back to English |
+| Scenario                        | Behavior                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| Missing translation key         | `t(key)` returns the key string itself (Req 2.5)                         |
+| Locale file fetch fails         | Fall back to English locale file; log error to `console.error` (Req 8.4) |
+| Invalid locale in localStorage  | Ignore the stored value and default to `en`                              |
+| Locale file returns non-JSON    | Treat as fetch failure — fall back to English                            |
 | Network timeout on locale fetch | Continue showing previously loaded translations until resolved (Req 8.3) |
 
 ## Testing Strategy
@@ -263,12 +262,12 @@ The project already has `fast-check` (v4.5.3) installed. Each correctness proper
 Each test will be tagged with a comment in the format:
 **Feature: i18n-language-selector, Property {number}: {property_text}**
 
-| Property | Test Approach |
-|----------|--------------|
-| Property 1: Locale key structure | Generate random locale maps, verify all keys match the component prefix pattern |
-| Property 2: Locale key set equality | Load both locale files, compare key sets for strict equality |
+| Property                                     | Test Approach                                                                                                                  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Property 1: Locale key structure             | Generate random locale maps, verify all keys match the component prefix pattern                                                |
+| Property 2: Locale key set equality          | Load both locale files, compare key sets for strict equality                                                                   |
 | Property 3: Translation function correctness | Generate random translation maps and random keys (both present and absent), verify `t()` returns correct value or key fallback |
-| Property 4: Locale persistence round-trip | Generate random supported locale values, write to mock localStorage, read back, verify equality |
+| Property 4: Locale persistence round-trip    | Generate random supported locale values, write to mock localStorage, read back, verify equality                                |
 
 ### Unit Testing
 

@@ -26,17 +26,17 @@ const renderWithLocale = (ui: React.ReactElement) =>
   render(
     <LocaleContext.Provider value={mockLocaleContext}>
       {ui}
-    </LocaleContext.Provider>
+    </LocaleContext.Provider>,
   );
 
 /**
  * **Feature: portfolio-design-improvements**
- * 
+ *
  * Property 7: Name Prominence in Header
  * **Validates: Requirements 4.2**
  * For any element within the header section, the name element SHALL have the largest
  * font-size value, establishing it as the primary visual element.
- * 
+ *
  * Property 28: Icon Size Proportionality
  * **Validates: Requirements 9.1**
  * For any icon adjacent to text, the icon height SHALL be between 0.75x and 1.25x
@@ -50,16 +50,19 @@ describe('Header Styling - Property-Based Tests', () => {
 
   beforeEach(() => {
     // Create a new JSDOM instance
-    dom = new JSDOM('<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>', {
-      url: 'http://localhost',
-      pretendToBeVisual: true,
-    });
+    dom = new JSDOM(
+      '<!DOCTYPE html><html><head></head><body><div id="root"></div></body></html>',
+      {
+        url: 'http://localhost',
+        pretendToBeVisual: true,
+      },
+    );
     document = dom.window.document;
-    window = dom.window as any;
-    
+    window = dom.window as unknown as Window & typeof globalThis;
+
     // Set up global window and document for React
     global.document = document;
-    global.window = window as any;
+    global.window = window as unknown as Window & typeof globalThis;
   });
 
   afterEach(() => {
@@ -149,7 +152,7 @@ describe('Header Styling - Property-Based Tests', () => {
    */
   function parseIconSizeFromClasses(element: Element): number {
     const classList = element.getAttribute('class') || '';
-    
+
     const sizeMap: Record<string, number> = {
       'h-3': 12,
       'h-4': 16,
@@ -174,7 +177,7 @@ describe('Header Styling - Property-Based Tests', () => {
         fc.property(
           // Generate random viewport widths to test responsive behavior
           fc.integer({ min: 320, max: 2560 }),
-          (viewportWidth) => {
+          viewportWidth => {
             // Set viewport width
             Object.defineProperty(window, 'innerWidth', {
               writable: true,
@@ -195,21 +198,25 @@ describe('Header Styling - Property-Based Tests', () => {
               expect(nameElement).toBeTruthy();
 
               if (nameElement) {
-                const nameFontSize = parseFontSizeFromClasses(nameElement.className);
+                const nameFontSize = parseFontSizeFromClasses(
+                  nameElement.className,
+                );
 
                 // Get all other text elements in the header
                 const allTextElements = header.querySelectorAll('span, a, li');
-                
+
                 // Check that name has the largest font size
-                allTextElements.forEach((element) => {
-                  const elementFontSize = parseFontSizeFromClasses((element as HTMLElement).className);
+                allTextElements.forEach(element => {
+                  const elementFontSize = parseFontSizeFromClasses(
+                    (element as HTMLElement).className,
+                  );
                   expect(nameFontSize).toBeGreaterThanOrEqual(elementFontSize);
                 });
               }
             }
-          }
+          },
         ),
-        { numRuns: 10 }
+        { numRuns: 10 },
       );
     });
 
@@ -219,17 +226,17 @@ describe('Header Styling - Property-Based Tests', () => {
       const nameElement = header?.querySelector('h1');
 
       expect(nameElement).toBeTruthy();
-      
+
       if (nameElement) {
         const classList = nameElement.className;
-        
+
         // Should have either text-display, text-h1, or responsive variants
-        const hasProperTypography = 
+        const hasProperTypography =
           classList.includes('text-display') ||
           classList.includes('text-h1') ||
           classList.includes('md:text-display') ||
           classList.includes('md:text-h1');
-        
+
         expect(hasProperTypography).toBe(true);
       }
     });
@@ -245,11 +252,12 @@ describe('Header Styling - Property-Based Tests', () => {
       const { container: mobileContainer } = renderWithLocale(<App />);
       const mobileHeader = mobileContainer.querySelector('header');
       const mobileNameElement = mobileHeader?.querySelector('h1');
-      
+
       expect(mobileNameElement).toBeTruthy();
-      
-      const mobileFontSize = mobileNameElement ? 
-        parseFontSizeFromClasses(mobileNameElement.className) : 0;
+
+      const mobileFontSize = mobileNameElement
+        ? parseFontSizeFromClasses(mobileNameElement.className)
+        : 0;
 
       // Test desktop
       Object.defineProperty(window, 'innerWidth', {
@@ -261,11 +269,12 @@ describe('Header Styling - Property-Based Tests', () => {
       const { container: desktopContainer } = renderWithLocale(<App />);
       const desktopHeader = desktopContainer.querySelector('header');
       const desktopNameElement = desktopHeader?.querySelector('h1');
-      
+
       expect(desktopNameElement).toBeTruthy();
-      
-      const desktopFontSize = desktopNameElement ? 
-        parseFontSizeFromClasses(desktopNameElement.className) : 0;
+
+      const desktopFontSize = desktopNameElement
+        ? parseFontSizeFromClasses(desktopNameElement.className)
+        : 0;
 
       // Desktop should have larger or equal font size
       expect(desktopFontSize).toBeGreaterThanOrEqual(mobileFontSize);
@@ -278,7 +287,7 @@ describe('Header Styling - Property-Based Tests', () => {
         fc.property(
           // Generate random viewport widths
           fc.integer({ min: 320, max: 2560 }),
-          (viewportWidth) => {
+          viewportWidth => {
             // Set viewport width
             Object.defineProperty(window, 'innerWidth', {
               writable: true,
@@ -296,8 +305,8 @@ describe('Header Styling - Property-Based Tests', () => {
             if (header) {
               // Find all list items with icons
               const listItems = header.querySelectorAll('li');
-              
-              listItems.forEach((li) => {
+
+              listItems.forEach(li => {
                 // Find icon (svg element)
                 const icon = li.querySelector('svg');
                 // Find text element (span or a)
@@ -305,36 +314,40 @@ describe('Header Styling - Property-Based Tests', () => {
 
                 if (icon && textElement) {
                   const iconHeight = parseIconSizeFromClasses(icon);
-                  const textLineHeight = parseLineHeightFromClasses((textElement as HTMLElement).className);
+                  const textLineHeight = parseLineHeightFromClasses(
+                    (textElement as HTMLElement).className,
+                  );
 
                   // Icon height should be between 0.75x and 1.25x the line height
-                  expect(iconHeight).toBeGreaterThanOrEqual(textLineHeight * 0.75);
+                  expect(iconHeight).toBeGreaterThanOrEqual(
+                    textLineHeight * 0.75,
+                  );
                   expect(iconHeight).toBeLessThanOrEqual(textLineHeight * 1.25);
                 }
               });
             }
-          }
+          },
         ),
-        { numRuns: 10 }
+        { numRuns: 10 },
       );
     });
 
     it('should have consistent icon sizing across all header icons', () => {
       const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
-      
+
       expect(header).toBeTruthy();
 
       if (header) {
         const icons = header.querySelectorAll('svg');
-        
+
         expect(icons.length).toBeGreaterThan(0);
 
         // Get the size of the first icon
         const firstIconSize = parseIconSizeFromClasses(icons[0]);
 
         // All icons should have the same size
-        icons.forEach((icon) => {
+        icons.forEach(icon => {
           const iconSize = parseIconSizeFromClasses(icon);
           expect(iconSize).toBe(firstIconSize);
         });
@@ -349,13 +362,13 @@ describe('Header Styling - Property-Based Tests', () => {
       expect(icons).toBeTruthy();
       expect(icons!.length).toBeGreaterThan(0);
 
-      icons?.forEach((icon) => {
+      icons?.forEach(icon => {
         const classList = icon.getAttribute('class') || '';
-        
+
         // Should have height and width classes
         expect(classList).toMatch(/h-\d+/);
         expect(classList).toMatch(/w-\d+/);
-        
+
         // Should use h-5 w-5 for proper proportionality
         expect(classList).toContain('h-5');
         expect(classList).toContain('w-5');
@@ -367,12 +380,12 @@ describe('Header Styling - Property-Based Tests', () => {
     it('should have proper spacing between name and contact info', () => {
       const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
-      
+
       expect(header).toBeTruthy();
 
       if (header) {
         const classList = header.className;
-        
+
         // Should have animation class (current implementation uses animate-fade-in)
         expect(classList).toContain('animate-fade-in');
       }
@@ -381,7 +394,7 @@ describe('Header Styling - Property-Based Tests', () => {
     it('should have semantic header element', () => {
       const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
-      
+
       expect(header).toBeTruthy();
       expect(header?.tagName.toLowerCase()).toBe('header');
     });
@@ -390,19 +403,20 @@ describe('Header Styling - Property-Based Tests', () => {
       const { container } = renderWithLocale(<App />);
       const header = container.querySelector('header');
       const contactList = header?.querySelector('ul');
-      
+
       expect(contactList).toBeTruthy();
 
       if (contactList) {
         const classList = contactList.className;
-        
+
         // Should have flex and flex-wrap for responsive layout
         expect(classList).toContain('flex');
         expect(classList).toContain('flex-wrap');
-        
+
         // Should have gap for spacing (either gap-* or gap-x-* and gap-y-*)
-        const hasGap = classList.match(/gap-\d+/) || 
-                       (classList.match(/gap-x-\d+/) && classList.match(/gap-y-\d+/));
+        const hasGap =
+          classList.match(/gap-\d+/) ||
+          (classList.match(/gap-x-\d+/) && classList.match(/gap-y-\d+/));
         expect(hasGap).toBeTruthy();
       }
     });

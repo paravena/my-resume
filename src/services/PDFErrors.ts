@@ -130,4 +130,3 @@ export function handlePDFError(error: unknown): string {
   }
   return 'An unexpected error occurred. Please try again.';
 }
-

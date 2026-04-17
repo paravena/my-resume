@@ -44,7 +44,19 @@ const Technologies = () => {
         <li>
           <TechnologyList
             title={t('technologies.databases.title')}
-            items={['Postgres', 'Oracle', 'Mysql', 'MongoDB', 'Contentful']}
+            items={['Postgres', 'Oracle', 'Mysql', 'MongoDB']}
+          />
+        </li>
+        <li>
+          <TechnologyList
+            title={t('technologies.platforms.title')}
+            items={['Contentful', 'Auth0', 'Optimizely']}
+          />
+        </li>
+        <li>
+          <TechnologyList
+            title={t('technologies.aiTools.title')}
+            items={['Claude Code', 'Windsurf', 'Junie', 'Kiro IDE', 'ChatGPT']}
           />
         </li>
         <li>

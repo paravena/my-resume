@@ -4,7 +4,7 @@ import * as fc from 'fast-check';
 /**
  * **Feature: portfolio-design-improvements, Property 1: Color Contrast Compliance**
  * **Validates: Requirements 1.3, 10.1, 10.2**
- * 
+ *
  * For any text element and its background color combination used in the application,
  * the contrast ratio SHALL meet WCAG AA standards (minimum 4.5:1 for normal text,
  * minimum 3:1 for large text ≥18px or ≥14px bold).
@@ -85,14 +85,21 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
  * Calculate relative luminance according to WCAG 2.0
  * https://www.w3.org/TR/WCAG20/#relativeluminancedef
  */
-function getRelativeLuminance(rgb: { r: number; g: number; b: number }): number {
+function getRelativeLuminance(rgb: {
+  r: number;
+  g: number;
+  b: number;
+}): number {
   const rsRGB = rgb.r / 255;
   const gsRGB = rgb.g / 255;
   const bsRGB = rgb.b / 255;
 
-  const r = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
-  const g = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
-  const b = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+  const r =
+    rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+  const g =
+    gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+  const b =
+    bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
 
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
@@ -117,7 +124,7 @@ function getContrastRatio(color1: string, color2: string): number {
 function meetsWCAGAA(
   contrastRatio: number,
   fontSize: number,
-  isBold: boolean = false
+  isBold: boolean = false,
 ): boolean {
   // Large text: ≥18px or ≥14px bold requires 3:1
   const isLargeText = fontSize >= 18 || (fontSize >= 14 && isBold);
@@ -132,11 +139,11 @@ function meetsWCAGAA(
 function getAllColors(): string[] {
   const colors: string[] = [];
 
-  Object.values(colorPalette).forEach((palette) => {
+  Object.values(colorPalette).forEach(palette => {
     if (typeof palette === 'string') {
       colors.push(palette);
     } else {
-      Object.values(palette).forEach((color) => {
+      Object.values(palette).forEach(color => {
         colors.push(color);
       });
     }
@@ -150,31 +157,111 @@ function getAllColors(): string[] {
  */
 const commonCombinations = [
   // White backgrounds with text colors
-  { text: colorPalette.secondary[700], bg: colorPalette.white, fontSize: 16, isBold: false },
-  { text: colorPalette.secondary[800], bg: colorPalette.white, fontSize: 16, isBold: false },
-  { text: colorPalette.secondary[900], bg: colorPalette.white, fontSize: 16, isBold: false },
+  {
+    text: colorPalette.secondary[700],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.secondary[800],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.secondary[900],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
   // Note: primary-600 does NOT meet 4.5:1 on white (only 4.1:1), use primary-700+ for text
-  { text: colorPalette.primary[700], bg: colorPalette.white, fontSize: 16, isBold: false },
-  { text: colorPalette.primary[800], bg: colorPalette.white, fontSize: 16, isBold: false },
-  
+  {
+    text: colorPalette.primary[700],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.primary[800],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
+
   // Sidebar background (primary-50 to primary-100 gradient) with text
-  { text: colorPalette.secondary[700], bg: colorPalette.primary[50], fontSize: 16, isBold: false },
-  { text: colorPalette.secondary[800], bg: colorPalette.primary[50], fontSize: 16, isBold: false },
-  { text: colorPalette.secondary[700], bg: colorPalette.primary[100], fontSize: 16, isBold: false },
-  { text: colorPalette.secondary[800], bg: colorPalette.primary[100], fontSize: 16, isBold: false },
-  
+  {
+    text: colorPalette.secondary[700],
+    bg: colorPalette.primary[50],
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.secondary[800],
+    bg: colorPalette.primary[50],
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.secondary[700],
+    bg: colorPalette.primary[100],
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.secondary[800],
+    bg: colorPalette.primary[100],
+    fontSize: 16,
+    isBold: false,
+  },
+
   // Headings (larger text, often bold)
-  { text: colorPalette.secondary[900], bg: colorPalette.white, fontSize: 30, isBold: true },
-  { text: colorPalette.secondary[800], bg: colorPalette.white, fontSize: 24, isBold: true },
-  { text: colorPalette.primary[700], bg: colorPalette.white, fontSize: 30, isBold: true },
-  
+  {
+    text: colorPalette.secondary[900],
+    bg: colorPalette.white,
+    fontSize: 30,
+    isBold: true,
+  },
+  {
+    text: colorPalette.secondary[800],
+    bg: colorPalette.white,
+    fontSize: 24,
+    isBold: true,
+  },
+  {
+    text: colorPalette.primary[700],
+    bg: colorPalette.white,
+    fontSize: 30,
+    isBold: true,
+  },
+
   // Links - primary-600 can be used for large text or with hover states
-  { text: colorPalette.primary[600], bg: colorPalette.white, fontSize: 18, isBold: false }, // Large text
-  { text: colorPalette.primary[700], bg: colorPalette.white, fontSize: 16, isBold: false }, // Normal text
-  
+  {
+    text: colorPalette.primary[600],
+    bg: colorPalette.white,
+    fontSize: 18,
+    isBold: false,
+  }, // Large text
+  {
+    text: colorPalette.primary[700],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  }, // Normal text
+
   // Gray text on white (common for body text)
-  { text: colorPalette.gray[700], bg: colorPalette.white, fontSize: 16, isBold: false },
-  { text: colorPalette.gray[800], bg: colorPalette.white, fontSize: 16, isBold: false },
+  {
+    text: colorPalette.gray[700],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
+  {
+    text: colorPalette.gray[800],
+    bg: colorPalette.white,
+    fontSize: 16,
+    isBold: false,
+  },
 ];
 
 describe('Color Contrast Compliance - Property-Based Tests', () => {
@@ -183,10 +270,10 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
       commonCombinations.forEach(({ text, bg, fontSize, isBold }) => {
         const contrastRatio = getContrastRatio(text, bg);
         const passes = meetsWCAGAA(contrastRatio, fontSize, isBold);
-        
+
         expect(passes).toBe(true);
         expect(contrastRatio).toBeGreaterThanOrEqual(
-          fontSize >= 18 || (fontSize >= 14 && isBold) ? 3 : 4.5
+          fontSize >= 18 || (fontSize >= 14 && isBold) ? 3 : 4.5,
         );
       });
     });
@@ -229,9 +316,9 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
             }
 
             return true;
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -246,7 +333,7 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
         colorPalette.primary[900],
       ];
 
-      textColors.forEach((textColor) => {
+      textColors.forEach(textColor => {
         const contrastRatio = getContrastRatio(textColor, whiteBg);
         expect(contrastRatio).toBeGreaterThanOrEqual(4.5);
       });
@@ -254,8 +341,11 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
 
     it('should allow primary-600 for large text (≥18px) on white background', () => {
       const whiteBg = colorPalette.white;
-      const contrastRatio = getContrastRatio(colorPalette.primary[600], whiteBg);
-      
+      const contrastRatio = getContrastRatio(
+        colorPalette.primary[600],
+        whiteBg,
+      );
+
       // primary-600 has ~4.1:1 contrast, which meets 3:1 for large text but not 4.5:1 for normal text
       expect(contrastRatio).toBeGreaterThanOrEqual(3);
       expect(meetsWCAGAA(contrastRatio, 18, false)).toBe(true);
@@ -273,22 +363,25 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
         colorPalette.secondary[900],
       ];
 
-      textColors.forEach((textColor) => {
+      textColors.forEach(textColor => {
         const contrastRatio = getContrastRatio(textColor, whiteBg);
         expect(contrastRatio).toBeGreaterThanOrEqual(4.5);
       });
     });
 
     it('should ensure text colors on sidebar background (primary-50/100) meet WCAG AA', () => {
-      const sidebarBackgrounds = [colorPalette.primary[50], colorPalette.primary[100]];
+      const sidebarBackgrounds = [
+        colorPalette.primary[50],
+        colorPalette.primary[100],
+      ];
       const textColors = [
         colorPalette.secondary[700],
         colorPalette.secondary[800],
         colorPalette.secondary[900],
       ];
 
-      sidebarBackgrounds.forEach((bg) => {
-        textColors.forEach((textColor) => {
+      sidebarBackgrounds.forEach(bg => {
+        textColors.forEach(textColor => {
           const contrastRatio = getContrastRatio(textColor, bg);
           expect(contrastRatio).toBeGreaterThanOrEqual(4.5);
         });
@@ -307,16 +400,16 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
             }
 
             const contrastRatio = getContrastRatio(textColor, bgColor);
-            
+
             // For large text, if it passes WCAG AA, it should have at least 3:1 ratio
             if (contrastRatio >= 3) {
               expect(meetsWCAGAA(contrastRatio, fontSize, false)).toBe(true);
             }
 
             return true;
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
 
@@ -332,16 +425,16 @@ describe('Color Contrast Compliance - Property-Based Tests', () => {
             }
 
             const contrastRatio = getContrastRatio(textColor, bgColor);
-            
+
             // For bold text ≥14px, if it passes WCAG AA, it should have at least 3:1 ratio
             if (contrastRatio >= 3) {
               expect(meetsWCAGAA(contrastRatio, fontSize, true)).toBe(true);
             }
 
             return true;
-          }
+          },
         ),
-        { numRuns: 20 }
+        { numRuns: 20 },
       );
     });
   });
