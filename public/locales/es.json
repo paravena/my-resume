@@ -143,6 +143,16 @@
   "downloadButton.longOperation.title": "Aún generando su PDF...",
   "downloadButton.longOperation.elapsed": "Esto está tomando más tiempo de lo esperado ({seconds}s transcurridos)",
 
+  "downloadWordButton.download": "Descargar Word",
+  "downloadWordButton.generating": "Generando Word...",
+  "downloadWordButton.downloaded": "¡Descargado!",
+  "downloadWordButton.retry": "Intentar de nuevo",
+
+  "downloadMenu.download": "Descargar",
+  "downloadMenu.asPdf": "Como PDF",
+  "downloadMenu.asWord": "Como Word",
+  "downloadMenu.ariaLabel": "Opciones de formato de descarga",
+
   "toolbar.languageSelector.en": "EN",
   "toolbar.languageSelector.es": "ES",
   "toolbar.languageSelector.ariaLabel": "Seleccionar idioma"

@@ -143,6 +143,16 @@
   "downloadButton.longOperation.title": "Still generating your PDF...",
   "downloadButton.longOperation.elapsed": "This is taking longer than expected ({seconds}s elapsed)",
 
+  "downloadWordButton.download": "Download Word",
+  "downloadWordButton.generating": "Generating Word...",
+  "downloadWordButton.downloaded": "Downloaded!",
+  "downloadWordButton.retry": "Try Again",
+
+  "downloadMenu.download": "Download",
+  "downloadMenu.asPdf": "As PDF",
+  "downloadMenu.asWord": "As Word",
+  "downloadMenu.ariaLabel": "Download format options",
+
   "toolbar.languageSelector.en": "EN",
   "toolbar.languageSelector.es": "ES",
   "toolbar.languageSelector.ariaLabel": "Select language"
